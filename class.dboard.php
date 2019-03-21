@@ -58,7 +58,7 @@ class DigitalBoard {
 		$sections = array(
 			array(
 				'id' => 'dboard_basic',
-				'title' => __( 'Basic' ),
+				'title' => __( 'General Settings' ),
 			),
 		);
 
