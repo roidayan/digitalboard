@@ -65,6 +65,14 @@ class DigitalBoard {
 		return $sections;
 	}
 
+	static function callback_weather_demo() {
+		$w = self::$weather_provider->get_weather();
+		if ( $w['cod'] != 200 )
+			print $w['message'];
+		else
+			print $w['name'].", ".$w['weather'][0]['description'];
+	}
+
 	static function get_settings_fields() {
 		$fields = array(
 			'dboard_basic' => array(
@@ -84,6 +92,11 @@ class DigitalBoard {
 					'type' => 'text',
 					'label' => __( 'OpenWeahterMap language' ),
 					'default' => 'he',
+				),
+				array(
+					'name' => '',
+					'label' => __( 'Weather' ),
+					'callback' => array( 'DigitalBoard', 'callback_weather_demo' ),
 				),
 				array(
 					'name' => 'pixabay_key',

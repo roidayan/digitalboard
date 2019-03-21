@@ -4,8 +4,8 @@ class OpenWeatherMap {
 	static $instance = null;
 	/* default key from wp-cloudy plugin */
 	var $key = "46c433f6ba7dd4d29d5718dac3d7f035";
-	var $loc = 'Tel Aviv,IL';
-	var $lang = 'he';
+	var $loc = 'US';
+	var $lang = 'en';
 	var $last_refresh = 0;
 	var $data = 0;
 
@@ -36,7 +36,7 @@ class OpenWeatherMap {
 		$weather_current = json_decode( $weather_data, true );
 
 		if ( empty($weather_current['cod']) || $weather_current['cod'] != 200 ) {
-			return;
+			return $weather_current;
 		}
 
 		$this->data = $weather_current;
