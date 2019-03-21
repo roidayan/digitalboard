@@ -2,7 +2,7 @@
 
 class DigitalBoard {
 	private static $initiated = false;
-	private static $settings_api;
+	private static $settings;
 	private static $weather_provider;
 	private static $image_provider;
 
@@ -11,9 +11,17 @@ class DigitalBoard {
 			self::$initiated = true;
 		}
 
-		self::$settings_api = new DigitalBoard_Settings_API;
-		self::$weather_provider = OpenWeatherMap::get_instance();
-		self::$image_provider = Pixabay::get_instance();
+		self::$settings = new DigitalBoard_Settings_API;
+
+		$openweathermap_key = self::$settings->get_option( 'openweathermap_key', 'dboard_basic' );
+		$openweathermap_loc = self::$settings->get_option( 'openweathermap_loc', 'dboard_basic' );
+		$openweathermap_lang = self::$settings->get_option( 'openweathermap_lang', 'dboard_basic' );
+		$pixabay_key = self::$settings->get_option( 'pixabay_key', 'dboard_basic' );
+
+		self::$weather_provider = OpenWeatherMap::get_instance( $openweathermap_key,
+									$openweathermap_loc,
+									$openweathermap_lang );
+		self::$image_provider = Pixabay::get_instance( $pixabay_key );
 		self::init_hooks();
 	}
 
@@ -23,8 +31,69 @@ class DigitalBoard {
 		add_action( 'wp_enqueue_scripts', array( 'DigitalBoard', 'enqueue_scripts' ), 20 );
 		add_filter( 'heartbeat2_settings', array( 'DigitalBoard', 'heartbeat_settings' ) );
 		add_filter( 'heartbeat2_received', array( 'DigitalBoard', 'heartbeat_received' ), 10, 2 );
-//		add_action( 'admin_init', array( $this, 'admin_init' ) );
-//		add_action( 'admin_menu', array( $this, 'admin_menu' ) );
+		add_action( 'admin_init', array( 'DigitalBoard', 'admin_init' ) );
+		add_action( 'admin_menu', array( 'DigitalBoard', 'admin_menu' ) );
+	}
+
+	static function admin_init() {
+		self::$settings->set_sections( self::get_settings_sections() );
+		self::$settings->set_fields( self::get_settings_fields() );
+		self::$settings->admin_init();
+	}
+
+	static function admin_menu() {
+		add_options_page( 'Digital Board', 'Digital Board',
+				  'manage_options', 'digital_board_settings',
+			array( 'DigitalBoard', 'plugin_page' ) );
+	}
+
+	static function plugin_page() {
+		echo '<div class="wrap">';
+		self::$settings->show_navigation();
+		self::$settings->show_forms();
+		echo '</div>';
+	}
+
+	static function get_settings_sections() {
+		$sections = array(
+			array(
+				'id' => 'dboard_basic',
+				'title' => __( 'Basic' ),
+			),
+		);
+
+		return $sections;
+	}
+
+	static function get_settings_fields() {
+		$fields = array(
+			'dboard_basic' => array(
+				array(
+					'name' => 'openweathermap_key',
+					'type' => 'text',
+					'label' => __( 'OpenWeahterMap API key' ),
+				),
+				array(
+					'name' => 'openweathermap_loc',
+					'type' => 'text',
+					'label' => __( 'OpenWeahterMap location' ),
+					'default' => 'Tel Aviv,IL',
+				),
+				array(
+					'name' => 'openweathermap_lang',
+					'type' => 'text',
+					'label' => __( 'OpenWeahterMap language' ),
+					'default' => 'he',
+				),
+				array(
+					'name' => 'pixabay_key',
+					'type' => 'text',
+					'label' => __( 'Pixabay API key' ),
+				),
+			),
+		);
+
+		return $fields;
 	}
 
 	static function heartbeat_settings( $settings ) {

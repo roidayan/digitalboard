@@ -11,9 +11,12 @@ class Pixabay {
 	var $cat = 'nature';
 	var $order = 'latest';
 
-	static function get_instance() {
+	static function get_instance( $key='' ) {
 		if ( ! self::$instance ) {
 			self::$instance = new self();
+			if ( $key ) {
+				self::$instance->key = $key;
+			}
 		}
 
 		return self::$instance;
