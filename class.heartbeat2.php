@@ -1,6 +1,8 @@
 <?php
 /**
  * Heartbeat2 based on Wordpress heartbeat.
+ *
+ * @package DigitalBoard
  */
 
 class Heartbeat2 {

@@ -1,4 +1,7 @@
 <?php
+/**
+ * @package DigitalBoard
+ */
 
 class Unsplash {
 	static $instance = null;

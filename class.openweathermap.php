@@ -1,4 +1,7 @@
 <?php
+/**
+ * @package DigitalBoard
+ */
 
 class OpenWeatherMap {
 	static $instance = null;

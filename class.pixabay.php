@@ -1,4 +1,7 @@
 <?php
+/**
+ * @package DigitalBoard
+ */
 
 class Pixabay {
 	static $instance = null;

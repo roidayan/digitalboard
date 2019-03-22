@@ -1,5 +1,8 @@
 /**
  * Digital Board
+ *
+ * @package DigitalBoard
+ *
  */
 
 jQuery(document).ready(function( $ ) {

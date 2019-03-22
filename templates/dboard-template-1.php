@@ -2,6 +2,8 @@
 /*
  * Template Name: Digital Board Template 1
  * Template Post Type: dboard_screen
+ *
+ * @package DigitalBoard
  */
 ?><!DOCTYPE html>
 <html <?php language_attributes(); ?> class="no-js no-svg">

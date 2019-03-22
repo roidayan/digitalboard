@@ -1,4 +1,7 @@
 <?php
+/**
+ * @package DigitalBoard
+ */
 
 /* https://core.trac.wordpress.org/ticket/20167 */
 function wp1_checklist_pages($args = '') {

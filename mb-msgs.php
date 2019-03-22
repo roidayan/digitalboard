@@ -2,6 +2,8 @@
 /**
  * MetaBox for selecting msgs
  * Description: <a target="_blank" href="http://wordpress.stackexchange.com/q/85107/89">WPSE 85107</a>
+ *
+ * @package DigitalBoard
  */
 
 class WPSE_85107 {

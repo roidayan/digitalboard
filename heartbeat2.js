@@ -1,6 +1,8 @@
 /**
  * Heartbeat2 based on Wordpress heartbeat.
  *
+ * @package DigitalBoard
+ *
  * Heartbeat API
  *
  * Available PHP filters:

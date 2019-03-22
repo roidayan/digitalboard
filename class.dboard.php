@@ -1,4 +1,7 @@
 <?php
+/**
+ * @package DigitalBoard
+ */
 
 class DigitalBoard {
 	private static $initiated = false;

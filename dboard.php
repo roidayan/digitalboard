@@ -1,4 +1,7 @@
 <?php
+/**
+ * @package DigitalBoard
+ */
 /*
 Plugin Name: Digital Board
 Plugin URI: https://roidayan.com
