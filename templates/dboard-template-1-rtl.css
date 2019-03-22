@@ -1,0 +1,29 @@
+/**
+ * @package DigitalBoard
+ */
+.rtl .wrapper {
+	margin-left: 400px;
+	margin-right: 0;
+}
+.rtl .msg {
+	float: right;
+}
+.rtl .sidebar {
+	float: left;
+	margin-left: -400px;
+	margin-right: 0;
+}
+.rtl header >  div {
+	float: right;
+}
+.rtl header .weather-line {
+	float: left;
+}
+.rtl header .weather-line > span {
+	padding-right: 0;
+	padding-left: 20px;
+}
+.rtl .background-image-credit {
+	right: auto;
+	left: 20px;
+}

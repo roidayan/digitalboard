@@ -162,7 +162,14 @@ class DigitalBoard {
 			array( 'jquery' ), '1.0.0', true );
 
 		wp_enqueue_style( 'dboard-page-style',
-			plugins_url( 'templates/dboard-template-1.css', __FILE__ ), array(), '1.0.0' );
+			plugins_url( 'templates/dboard-template-1.css', __FILE__ ),
+			array(), '1.0.0' );
+
+		if ( is_rtl() ) {
+			wp_enqueue_style( 'dboard-page-style-rtl',
+				plugins_url('templates/dboard-template-1-rtl.css', __FILE__),
+				array(), '1.0.0' );
+		}
 	}
 
 	static function create_post_types() {
