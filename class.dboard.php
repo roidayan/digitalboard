@@ -3,11 +3,16 @@
  * @package DigitalBoard
  */
 
+function return_7200( $seconds ) {
+	return 7200;
+}
+
 class DigitalBoard {
 	private static $initiated = false;
 	private static $settings;
 	private static $weather_provider;
 	private static $image_provider;
+	private static $last_rss_item;
 
 	public static function init() {
 		if ( ! self::$initiated ) {
@@ -144,11 +149,17 @@ class DigitalBoard {
 	}
 
 	static function heartbeat_received( $response, $data ) {
-		if ( empty( $data['dboard'] ) || empty( $data['dboard']['screen_id'] ) )
+		if ( empty( $data['dboard'] ) || empty( $data['dboard']['screen_id'] ) ) {
 			return $response;
+		}
+
+		if ( ! empty( $data['dboard']['last_rss_item'] ) ) {
+			self::$last_rss_item = $data['dboard']['last_rss_item'];
+		}
 
 		$weather = self::$weather_provider;
 		$page_version = self::get_page_version( $data['dboard']['screen_id'] );
+		$news_ticker = self::get_news_ticker();
 
 		$response['dboard'] = array(
 			'weather_name' => $weather->get_weather_name(),
@@ -159,6 +170,8 @@ class DigitalBoard {
 			'background_image' => self::get_background_image(),
 			'background_image_credit' => self::get_background_image_credit(),
 			'page_version' => $page_version,
+			'news_ticker' => $news_ticker,
+			'last_rss_item' => self::$last_rss_item,
 		);
 
 		return $response;
@@ -274,20 +287,51 @@ class DigitalBoard {
 		return self::$settings->get_option( 'rss_feed_label', 'dboard_basic' );
 	}
 
+	static function fetch_feed( $url ) {
+		add_filter( 'wp_feed_cache_transient_lifetime' , 'return_7200' );
+		$feed = fetch_feed( $url );
+		remove_filter( 'wp_feed_cache_transient_lifetime' , 'return_7200' );
+		return $feed;
+	}
+
 	static function get_rss_feed() {
 		$url = self::$settings->get_option( 'rss_feed', 'dboard_basic' );
-		$rss = fetch_feed( $url );
-		$maxitems = 0;
+		$rss = self::fetch_feed( $url );
+
+		if ( is_wp_error( $rss ) ) {
+			return;
+		}
+
+		$maxitems = $rss->get_item_quantity( 5 );
+		$rss_items = $rss->get_items( 0, $maxitems );
+		$last_date = $rss_items[0]->get_date();
+
+		if ( $last_date == self::$last_rss_item ) {
+			return;
+		}
+
+		self::$last_rss_item = $last_date;
 		$out = array();
 
-		if ( ! is_wp_error( $rss ) ) {
-			$maxitems = $rss->get_item_quantity( 5 );
-			$rss_items = $rss->get_items( 0, $maxitems );
-			foreach ( $rss_items as $item ) {
-				$out[] = $item->get_title();
-			}
+		foreach ( $rss_items as $item ) {
+			$out[] = $item->get_title();
 		}
 
 		return $out;
+	}
+
+	static function get_news_ticker() {
+		$news = self::get_rss_feed();
+		if ( ! $news ) {
+			return;
+		}
+
+		$tmp = '';
+		foreach( $news as $item ) {
+			$tmp .= '<li><span class="bn-seperator bn-news-dot"></span>'.$item.'</li>';
+		}
+		$tmp = '<div class="bn-news"><ul>'.$tmp.'</ul></div>';
+		$label = '<div class="bn-label">'.DigitalBoard::get_rss_feed_label().'</div>';
+		return '<div class="breaking-news-ticker">'.$label.$tmp.'</div>';
 	}
 }

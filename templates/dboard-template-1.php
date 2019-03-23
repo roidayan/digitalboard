@@ -66,15 +66,8 @@ $img = DigitalBoard::get_background_image();
 </div> <!-- /container -->
 
 <?php
-	$news = DigitalBoard::get_rss_feed();
+	$news = DigitalBoard::get_news_ticker();
 	if ( $news ) {
-		$tmp = '';
-		foreach( $news as $item ) {
-			$tmp .= '<li><span class="bn-seperator bn-news-dot"></span>'.$item.'</li>';
-		}
-		$tmp = '<div class="bn-news"><ul>'.$tmp.'</ul></div>';
-		$label = '<div class="bn-label">'.DigitalBoard::get_rss_feed_label().'</div>';
-		$news = '<div class="breaking-news-ticker">'.$label.$tmp.'</div>';
 		echo "<footer>$news</footer>";
 	}
 ?>

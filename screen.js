@@ -9,18 +9,13 @@ jQuery(document).ready(function( $ ) {
 	dboard_update_time();
 	setInterval(dboard_update_time, 1000);
 	dboard_set_next_midnight_event();
-
-	var dir = jQuery('html').attr('dir');
-	jQuery('.breaking-news-ticker').breakingNews({
-		effect: 'scroll',
-		direction: dir,
-		height: '50px',
-		fontSize: '1.5em'});
+	init_news_ticker();
 
 }).on( 'heartbeat2-send', function ( event, data ) {
 	data['dboard'] = {
 		"hello": 1,
 		"screen_id": pagenow,
+		"last_rss_item": dboard_last_rss_item,
 	};
 
 }).on( 'heartbeat2-tick', function ( event, data ) {
@@ -30,6 +25,7 @@ jQuery(document).ready(function( $ ) {
 });
 
 var dboard_page_version = 0;
+var dboard_last_rss_item = '';
 
 function dboard_refresh_data( data ) {
 	if ( ! data.dboard ) {
@@ -44,6 +40,7 @@ function dboard_refresh_data( data ) {
 	}
 
 	dboard_page_version = data.dboard.page_version;
+	dboard_last_rss_item = data.dboard.last_rss_item;
 
 	jQuery( '.weather-line .temp' ).html( data.dboard.weather_temp );
 	jQuery( '.weather-line .desc' ).html( data.dboard.weather_desc );
@@ -51,6 +48,11 @@ function dboard_refresh_data( data ) {
 	jQuery( '.container' ).attr( 'background-image', data.dboard.background_image );
 	jQuery( '.background-image-credit' ).html( data.dboard.background_image_credit );
 	jQuery( 'header .date').html( data.dboard.current_date );
+
+	if ( data.dboard.news_ticker ) {
+		jQuery('.breaking-news-ticker').replaceWith( data.dboard.news_ticker );
+		init_news_ticker();
+	}
 }
 
 function dboard_set_next_midnight_event() {
@@ -78,4 +80,14 @@ function dboard_update_time() {
 	var h = addZero(d.getHours());
 	var span = document.getElementById("clock1");
 	span.textContent = h + ":" + m + ":" + s;
+}
+
+function init_news_ticker() {
+	var dir = jQuery('html').attr('dir');
+
+	jQuery('.breaking-news-ticker').breakingNews({
+		effect: 'scroll',
+		direction: dir,
+		height: '50px',
+		fontSize: '1.5em'});
 }
