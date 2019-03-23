@@ -10,6 +10,13 @@ jQuery(document).ready(function( $ ) {
 	setInterval(dboard_update_time, 1000);
 	dboard_set_next_midnight_event();
 
+	var dir = jQuery('html').attr('dir');
+	jQuery('.breaking-news-ticker').breakingNews({
+		effect: 'scroll',
+		direction: dir,
+		height: '50px',
+		fontSize: '1.5em'});
+
 }).on( 'heartbeat2-send', function ( event, data ) {
 	data['dboard'] = {
 		"hello": 1,

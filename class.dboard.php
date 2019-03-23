@@ -106,6 +106,16 @@ class DigitalBoard {
 					'type' => 'text',
 					'label' => __( 'Pixabay API key' ),
 				),
+				array(
+					'name' => 'rss_feed_label',
+					'type' => 'text',
+					'label' => __( 'RSS feed label' ),
+				),
+				array(
+					'name' => 'rss_feed',
+					'type' => 'text',
+					'label' => __( 'RSS feed' ),
+				),
 			),
 		);
 
@@ -156,6 +166,14 @@ class DigitalBoard {
 
 	static function enqueue_scripts() {
 		wp_enqueue_script( 'heartbeat2' );
+
+		wp_enqueue_script( 'news-ticker',
+			 plugins_url( 'news-ticker/breaking-news-ticker.min.js', __FILE__ ),
+			array( 'jquery' ), '1.0.0' );
+
+		wp_enqueue_style( 'news-ticker',
+			plugins_url( 'news-ticker/breaking-news-ticker.css', __FILE__ ),
+			array(), '1.0.0' );
 
 		wp_enqueue_script( 'dboard-screen-script',
 			plugins_url( 'screen.js', __FILE__ ),
@@ -250,5 +268,26 @@ class DigitalBoard {
 
 	static function get_background_image_credit() {
 		return self::$image_provider->get_image_credit();
+	}
+
+	static function get_rss_feed_label() {
+		return self::$settings->get_option( 'rss_feed_label', 'dboard_basic' );
+	}
+
+	static function get_rss_feed() {
+		$url = self::$settings->get_option( 'rss_feed', 'dboard_basic' );
+		$rss = fetch_feed( $url );
+		$maxitems = 0;
+		$out = array();
+
+		if ( ! is_wp_error( $rss ) ) {
+			$maxitems = $rss->get_item_quantity( 5 );
+			$rss_items = $rss->get_items( 0, $maxitems );
+			foreach ( $rss_items as $item ) {
+				$out[] = $item->get_title();
+			}
+		}
+
+		return $out;
 	}
 }

@@ -65,7 +65,19 @@ $img = DigitalBoard::get_background_image();
   </div> <!-- /wrapper -->
 </div> <!-- /container -->
 
-<!-- <footer>FOOTER</footer> -->
+<?php
+	$news = DigitalBoard::get_rss_feed();
+	if ( $news ) {
+		$tmp = '';
+		foreach( $news as $item ) {
+			$tmp .= '<li><span class="bn-seperator bn-news-dot"></span>'.$item.'</li>';
+		}
+		$tmp = '<div class="bn-news"><ul>'.$tmp.'</ul></div>';
+		$label = '<div class="bn-label">'.DigitalBoard::get_rss_feed_label().'</div>';
+		$news = '<div class="breaking-news-ticker">'.$label.$tmp.'</div>';
+		echo "<footer>$news</footer>";
+	}
+?>
 
 </body>
 <?php wp_footer(); ?>
