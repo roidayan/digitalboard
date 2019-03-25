@@ -42,11 +42,9 @@ $bg_img = DigitalBoard::get_background_image();
 <div class="container" style="background-image: url('<?php echo $bg_img; ?>')">
   <div class="background-image-credit"><?php echo DigitalBoard::get_background_image_credit(); ?></div>
   <div class="wrapper">
-    <div class="msg">
-<?php
-	DigitalBoard::show_msgs();
-?>
-    </div> <!-- /msg -->
+    <div class="sidebar-msgs">
+      <?php DigitalBoard::show_msgs( "msg widget" ); ?>
+    </div> <!-- /sidebar-msgs -->
     <div class="sidebar">
 <?php if ( is_active_sidebar( DBOARD_SIDEBAR ) ) : ?>
 	<div id="secondary" class="sidebar-container">

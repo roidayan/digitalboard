@@ -237,7 +237,7 @@ class DigitalBoard {
 		);
 	}
 
-	static function show_msgs() {
+	static function show_msgs( $class ) {
 		$post_id = get_the_ID();
     		$meta_key = "_selected_" . DBOARD_MSG_POST_TYPE;
 	  	$selected_post_id = get_post_meta( $post_id, $meta_key, true );
@@ -248,8 +248,10 @@ class DigitalBoard {
 		global $post;
 		$post = get_post($first);
 		setup_postdata( $post );
+		echo "<div class=\"$class\">";
 		the_title( '<h3>', '</h3>' );
 		the_content();
+		echo "</div>";
 		wp_reset_postdata( $post );
 	}
 

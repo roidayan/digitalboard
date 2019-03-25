@@ -51,10 +51,11 @@ header {
 	padding-bottom: 120px;
 	height: 100%;
 }
-.msg {
+.sidebar-msgs {
 	float: left;
+}
+.msg {
 	color: white;
-	display: inline-block;
 	font-size: 2em;
 	text-align: initial;
 	padding: 0 20px;
