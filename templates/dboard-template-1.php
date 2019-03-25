@@ -46,10 +46,10 @@ $bg_img = DigitalBoard::get_background_image();
       <?php DigitalBoard::show_msgs( "msg widget" ); ?>
     </div> <!-- /sidebar-msgs -->
     <div class="sidebar">
-<?php if ( is_active_sidebar( DBOARD_SIDEBAR ) ) : ?>
+<?php if ( is_active_sidebar( DigitalBoard::get_sidebar_id() ) ) : ?>
 	<div id="secondary" class="sidebar-container">
 	  <div class="widget-area">
-	<?php dynamic_sidebar( DBOARD_SIDEBAR ); ?>
+	<?php dynamic_sidebar( DigitalBoard::get_sidebar_id() ); ?>
  	  </div>
 	</div>
 <?php endif; ?>

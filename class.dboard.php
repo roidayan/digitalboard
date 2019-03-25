@@ -258,15 +258,31 @@ class DigitalBoard {
 		wp_reset_postdata( $post );
 	}
 
+	static function get_sidebar_id( $post=0 ) {
+		$post = get_post( $post );
+		return DBOARD_SIDEBAR.'-'.$post->post_name;
+	}
+
 	static function widgets_init() {
-		register_sidebar( array(
-			'name' => __( 'Digital Board Sidebar' ),
-			'id' => DBOARD_SIDEBAR,
-			'before_widget' => '<div id="%1$s" class="widget %2$s">',
-			'after_widget'  => '</div>',
-			'before_title'  => '<h3>',
-			'after_title'   => '</h3>',
-		) );
+		$posts = get_posts(array(
+			'posts_per_page' => -1,
+			'post_type' => DBOARD_SCREEN_POST_TYPE,
+		));
+
+		foreach( $posts as $p ) {
+			if ( empty( $p->post_name  ) ) {
+				continue;
+			}
+
+			register_sidebar( array(
+				'name' => $p->post_name,
+				'id' => self::get_sidebar_id( $p ),
+				'before_widget' => '<div id="%1$s" class="widget %2$s">',
+				'after_widget'  => '</div>',
+				'before_title'  => '<h3>',
+				'after_title'   => '</h3>',
+			) );
+		}
 	}
 
 	static function get_current_date() {
