@@ -45,7 +45,8 @@ function dboard_refresh_data( data ) {
 	jQuery( '.weather-line .temp' ).html( data.dboard.weather_temp );
 	jQuery( '.weather-line .desc' ).html( data.dboard.weather_desc );
 	jQuery( '.weather-line .icon img' ).attr( 'src', data.dboard.weather_icon );
-	jQuery( '.container' ).attr( 'background-image', data.dboard.background_image );
+	var url = 'url("'+data.dboard.background_image+'")';
+	jQuery( '.container' ).css( 'background-image', url );
 	jQuery( '.background-image-credit' ).html( data.dboard.background_image_credit );
 	jQuery( 'header .date').html( data.dboard.current_date );
 
