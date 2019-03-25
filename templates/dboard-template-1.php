@@ -22,14 +22,8 @@ function show_weather() {
 	echo "</div>";
 }
 
-$img = DigitalBoard::get_background_image();
+$bg_img = DigitalBoard::get_background_image();
 ?>
-
-<style>
-	.container {
-		background-image: url("<?php echo $img; ?>");
-	}
-</style>
 
 <script>
 	var pagenow = <?php the_ID(); ?>;
@@ -45,7 +39,7 @@ $img = DigitalBoard::get_background_image();
   <div class="clock" id="clock1"></div>
 </header>
 
-<div class="container">
+<div class="container" style="background-image: url('<?php echo $bg_img; ?>')">
   <div class="background-image-credit"><?php echo DigitalBoard::get_background_image_credit(); ?></div>
   <div class="wrapper">
     <div class="msg">

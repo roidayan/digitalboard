@@ -34,6 +34,7 @@ header {
 }
 .container{
       background-color: darkgreen;
+      background-size: cover;
       position: absolute;
       top: 50px;  /* Height of header */
       left: 0;
@@ -42,9 +43,6 @@ header {
       width: 100%;
 }
 
-.container {
-	background-size: cover;
-}
 .wrapper {
 	margin-right: 400px;
 	padding-top: 20px;
