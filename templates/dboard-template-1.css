@@ -61,7 +61,7 @@ header {
 /*	border: 2px solid grey;*/
 	border-radius: 10px;
 /*    	background: rgba(204, 204, 204, 0.5);*/
-	background: rgba(2, 2, 2, 0.28);
+	background: rgba(2, 2, 2, 0.5);
 	overflow: hidden;
 }
 header >  div {
