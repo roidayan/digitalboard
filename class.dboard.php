@@ -121,6 +121,14 @@ class DigitalBoard {
 					'type' => 'text',
 					'label' => __( 'RSS feed' ),
 				),
+				array(
+					'name' => 'hb_interval',
+					'type' => 'number',
+					'min' => 30,
+					'max' => 900,
+					'placeholder' => 300,
+					'label' => __( 'Heartbeat interval' ),
+				),
 			),
 		);
 
@@ -133,7 +141,13 @@ class DigitalBoard {
 		if ( $pagenow != 'index.php' ) {
 			return $settings;
 		}
-		$settings['interval'] = 300;
+
+		$interval = self::$settings->get_option( 'hb_interval', 'dboard_basic' );
+		if ( empty( $interval ) || $interval < 30 || $interval >  900 ) {
+			$interval = 300;
+		}
+
+		$settings['interval'] = $interval;
 		return $settings;
 	}
 
