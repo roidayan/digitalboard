@@ -127,7 +127,7 @@ class DigitalBoard {
 					'min' => 30,
 					'max' => 900,
 					'placeholder' => 300,
-					'label' => __( 'Heartbeat interval' ),
+					'label' => __( 'Heartbeat interval in seconds' ),
 				),
 			),
 		);
