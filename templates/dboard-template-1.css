@@ -57,6 +57,7 @@ header {
 .msg {
 	color: white;
 	font-size: 2em;
+	line-height: 1.2em;
 	text-align: initial;
 	padding: 0 20px;
 /*	border: 2px solid grey;*/
