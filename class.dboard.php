@@ -36,7 +36,6 @@ class DigitalBoard {
 	static function init_hooks() {
 		add_action( 'init', array( 'DigitalBoard', 'create_post_types' ) );
 		add_action( 'widgets_init', array( 'DigitalBoard', 'widgets_init' ) );
-		add_action( 'wp_enqueue_scripts', array( 'DigitalBoard', 'enqueue_scripts' ), 20 );
 		add_filter( 'heartbeat2_settings', array( 'DigitalBoard', 'heartbeat_settings' ) );
 		add_filter( 'heartbeat2_received', array( 'DigitalBoard', 'heartbeat_received' ), 10, 2 );
 		add_action( 'admin_init', array( 'DigitalBoard', 'admin_init' ) );
@@ -191,6 +190,9 @@ class DigitalBoard {
 		return $response;
 	}
 
+	/**
+	 * Enqueue this from templates
+	 */
 	static function enqueue_scripts() {
 		wp_enqueue_script( 'heartbeat2' );
 
