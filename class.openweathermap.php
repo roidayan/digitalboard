@@ -9,8 +9,10 @@ class OpenWeatherMap {
 	var $key = "46c433f6ba7dd4d29d5718dac3d7f035";
 	var $loc = 'US';
 	var $lang = 'en';
-	var $last_refresh = 0;
 	var $data = 0;
+	var $transient_key = 'openweathermap';
+	var $cache = false;
+	var $expire = 600;
 
 	static function get_instance( $key='', $loc='', $lang='' ) {
 		if ( ! self::$instance ) {
@@ -25,9 +27,30 @@ class OpenWeatherMap {
 		return self::$instance;
 	}
 
+	function get_cache() {
+		$this->cache = get_transient( $this->transient_key );
+	}
+
+	function set_cache( $query, $data ) {
+		$this->cache = array(
+			'last_refresh' => time(),
+			'last_query'   => $query,
+			'data'         => $data,
+		);
+
+		set_transient( $this->transient_key, $this->cache, $this->expire );
+	}
+
+	function valid_cache( $query ) {
+		$this->get_cache();
+		return ( $this->cache && $this->cache['last_query'] == $query );
+	}
+
 	function get_weather() {
-		if ( time() - $this->last_refresh < 600 ) {
-			return $this->data;
+		$query = $this->loc . $this->lang;
+
+		if ( $this->valid_cache( $query ) ) {
+			return $this->cache['data'];
 		}
 
 		if ( ! $this->key ) {
@@ -43,7 +66,7 @@ class OpenWeatherMap {
 		}
 
 		$this->data = $weather_current;
-		$this->last_refresh = time();
+		$this->set_cache( $query, $weather_current );
 		return $weather_current;
 	}
 
