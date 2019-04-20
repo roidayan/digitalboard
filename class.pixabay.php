@@ -7,12 +7,12 @@ class Pixabay {
 	static $instance = null;
 	var $data = 0;
 	var $key = "";
-	var $min_time = 3600; // minimum time for refresh for the same query.
-	var $last_query = '';
-	var $last_refresh = 0;
 	var $api_url = 'https://pixabay.com/api/';
 	var $cat = 'nature';
 	var $order = 'latest';
+	var $transient_key = 'pixabay';
+	var $cache = false;
+	var $expire = 3600;
 
 	static function get_instance( $key='' ) {
 		if ( ! self::$instance ) {
@@ -26,22 +26,27 @@ class Pixabay {
 	}
 
 	function get_cache() {
-		return $this->data;
+		$this->cache = get_transient( $this->transient_key );
 	}
 
 	function set_cache( $query, $data ) {
-		$this->last_refresh = time();
-		$this->last_query = $query;
-		$this->data = $data;
+		$this->cache = array(
+			'last_refresh' => time(),
+			'last_query'   => $query,
+			'data'         => $data,
+		);
+
+		set_transient( $this->transient_key, $this->cache, $this->expire );
 	}
 
 	function valid_cache( $query ) {
-		return ( $query == $this->last_query && time() - $this->last_refresh < $this->min_time);
+		$this->get_cache();
+		return ( $this->cache && $this->cache['last_query'] == $query );
 	}
 
 	function get_result( $query ) {
 		if ( $this->valid_cache( $query ) ) {
-			return $this->get_cache();
+			return $this->cache['data'];
 		}
 
 		if ( ! $this->key ) {
