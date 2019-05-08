@@ -56,6 +56,9 @@ function dboard_refresh_data( data ) {
 }
 
 function dboard_set_background_image( data ) {
+	if ( ! data.dboard.background_image )
+		return;
+
 	var url = 'url("'+data.dboard.background_image+'")';
 	var cur = jQuery( '.container' ).css( 'background-image' );
 	if ( cur != url ) {

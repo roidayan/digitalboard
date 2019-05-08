@@ -150,7 +150,8 @@ class DigitalBoard {
 		return $settings;
 	}
 
-	static function get_page_version( $page_id ) {
+	static function get_page_version() {
+		$page_id = get_the_ID();
 		$mod = get_the_modified_time( 'U', $page_id );
 		// TODO
 		// 1.check msgs mod time?
@@ -166,12 +167,16 @@ class DigitalBoard {
 			return $response;
 		}
 
+		global $post;
+		$post = get_post( $data['dboard']['screen_id'] );
+		setup_postdata( $post );
+
 		if ( ! empty( $data['dboard']['last_rss_item'] ) ) {
 			self::$last_rss_item = $data['dboard']['last_rss_item'];
 		}
 
 		$weather = self::$weather_provider;
-		$page_version = self::get_page_version( $data['dboard']['screen_id'] );
+		$page_version = self::get_page_version();
 		$news_ticker = self::get_news_ticker();
 
 		$response['dboard'] = array(
@@ -187,6 +192,7 @@ class DigitalBoard {
 			'last_rss_item' => self::$last_rss_item,
 		);
 
+		wp_reset_postdata();
 		return $response;
 	}
 
@@ -313,7 +319,7 @@ class DigitalBoard {
 			$img = wp_get_attachment_url( get_post_thumbnail_id( get_the_ID() ), 'thumbnail' );
 		}
 
-		return $img;
+		return $img ? : '';
 	}
 
 	static function get_background_image_credit() {
