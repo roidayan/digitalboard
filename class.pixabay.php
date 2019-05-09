@@ -27,6 +27,7 @@ class Pixabay {
 
 	function get_cache() {
 		$this->cache = get_transient( $this->transient_key );
+		return $this->cache;
 	}
 
 	function set_cache( $query, $data ) {
@@ -79,7 +80,7 @@ class Pixabay {
 		if ( ! $w )
 			return;
 
-		$name = $w['user'];
+		$name = $w['data']['user'];
 		return "Photo by $name on Pixabay";
 	}
 
