@@ -13,6 +13,7 @@ class DigitalBoard {
 	private static $weather_provider;
 	private static $image_provider;
 	private static $last_rss_item;
+	private static $meta_key_use_image_provider = '_dboard_use_image_provider';
 
 	public static function init() {
 		if ( ! self::$initiated ) {
@@ -40,6 +41,34 @@ class DigitalBoard {
 		add_filter( 'heartbeat2_received', array( 'DigitalBoard', 'heartbeat_received' ), 10, 2 );
 		add_action( 'admin_init', array( 'DigitalBoard', 'admin_init' ) );
 		add_action( 'admin_menu', array( 'DigitalBoard', 'admin_menu' ) );
+		add_filter( 'admin_post_thumbnail_html', array( 'DigitalBoard', 'add_featured_image_display_settings' ), 10, 2 );
+		add_action( 'save_post', array( 'DigitalBoard', 'save_post' ), 10, 2 );
+	}
+
+	static function save_post( $post_id, $post ) {
+		$field_id = self::$meta_key_use_image_provider;
+
+		if ( $post->post_type == DBOARD_SCREEN_POST_TYPE ) {
+			if ( isset( $_POST[$field_id] ) ) {
+				update_post_meta( $post_id, $field_id, 1 );
+			} else {
+				delete_post_meta( $post_id, $field_id );
+			}
+		}
+	}
+
+	static function add_featured_image_display_settings( $content, $post_id ) {
+		$field_id    = self::$meta_key_use_image_provider;
+		$field_value = esc_attr( get_post_meta( $post_id, $field_id, true ) );
+		$field_text  = esc_html__( 'Use image provider' );
+		$field_state = checked( $field_value, 1, false);
+
+		$field_label = sprintf(
+			'<p><label for="%1$s"><input type="checkbox" name="%1$s" id="%1$s" value="%2$s" %3$s> %4$s</label></p>',
+			$field_id, $field_value, $field_state, $field_text
+		);
+
+		return $content .= $field_label;
 	}
 
 	static function admin_init() {
@@ -311,9 +340,18 @@ class DigitalBoard {
 		return date_i18n( get_option( 'date_format' ) );
 	}
 
+	static function use_image_provider() {
+		$field_id = self::$meta_key_use_image_provider;
+		return esc_attr( get_post_meta( get_the_ID(), $field_id, true ) );
+	}
+
 	static function get_background_image() {
-		$weather = self::$weather_provider;
-		$img = self::$image_provider->get_image( $weather->get_weather_name() );
+		$img = '';
+
+		if ( self::use_image_provider() ) {
+			$weather = self::$weather_provider;
+			$img = self::$image_provider->get_image( $weather->get_weather_name() );
+		}
 
 		if ( empty( $img ) ) {
 			$img = wp_get_attachment_url( get_post_thumbnail_id( get_the_ID() ), 'thumbnail' );
@@ -323,7 +361,9 @@ class DigitalBoard {
 	}
 
 	static function get_background_image_credit() {
-		return self::$image_provider->get_image_credit();
+		if ( self::use_image_provider() ) {
+			return self::$image_provider->get_image_credit();
+		}
 	}
 
 	static function get_rss_feed_label() {
