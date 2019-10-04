@@ -109,6 +109,15 @@ class DigitalBoard {
 			print $w['name'].", ".$w['weather'][0]['description'];
 	}
 
+	static function callback_pixabay_demo() {
+		$w = self::$image_provider->get_result( 'test' );
+		if ( empty( $w ) ) {
+			print self::$image_provider->get_last_resp_code();
+		} else {
+			print 'OK';
+		}
+	}
+
 	static function get_settings_fields() {
 		$fields = array(
 			'dboard_basic' => array(
@@ -138,6 +147,11 @@ class DigitalBoard {
 					'name' => 'pixabay_key',
 					'type' => 'text',
 					'label' => __( 'Pixabay API key' ),
+				),
+				array(
+					'name' => 'pixabay_demo',
+					'label' => __( 'Pixabay status' ),
+					'callback' => array( 'DigitalBoard', 'callback_pixabay_demo' ),
 				),
 				array(
 					'name' => 'rss_feed_label',
