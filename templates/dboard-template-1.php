@@ -6,7 +6,20 @@
  * @package DigitalBoard
  */
 
+function tpl_scripts() {
+	wp_enqueue_style( 'dboard-page-style',
+		plugins_url( 'dboard-template-1.css', __FILE__ ),
+		array(), '1.0.0' );
+
+	if ( is_rtl() ) {
+		wp_enqueue_style( 'dboard-page-style-rtl',
+			plugins_url('dboard-template-1-rtl.css', __FILE__),
+			array(), '1.0.0' );
+	}
+}
+
 add_action( 'wp_enqueue_scripts', array( 'DigitalBoard', 'enqueue_scripts' ), 20 );
+add_action( 'wp_enqueue_scripts', 'tpl_scripts', 20 );
 
 ?><!DOCTYPE html>
 <html <?php language_attributes(); ?> class="no-js no-svg">
