@@ -130,8 +130,8 @@ class DigitalBoard {
 					'default' => 'he',
 				),
 				array(
-					'name' => '',
-					'label' => __( 'Weather' ),
+					'name' => 'weather_demo',
+					'label' => __( 'Weather status' ),
 					'callback' => array( 'DigitalBoard', 'callback_weather_demo' ),
 				),
 				array(
