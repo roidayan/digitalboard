@@ -16,15 +16,7 @@ class SunTimesShortcodes {
 	static $sc_defaults = array(
 		'latitude'  => 32.08088,
 		'longitude' => 34.78057,
-		'tzid'      => 'Asia/Jerusalem',
-		'offset'    => 2,
 	);
-
-	static function get_timezone_offset( $tzid ) {
-		//$tz = new DateTimeZone( $tzid );
-		//return $tz->getOffset( new DateTime() );
-		return self::$sc_defaults['offset'];
-	}
 
 	static function sunrise( $atts ) {
 		$a = shortcode_atts( array(
@@ -32,7 +24,7 @@ class SunTimesShortcodes {
 			'bar' => 'something else',
 		), $atts, NULL );
 
-		$offset = self::get_timezone_offset( self::$sc_defaults['tzid'] );
+		$offset = get_option('gmt_offset');
 
 		return date_sunrise(time(), SUNFUNCS_RET_STRING, self::$sc_defaults['latitude'], self::$sc_defaults['longitude'], 90, $offset);
 	}
@@ -43,7 +35,7 @@ class SunTimesShortcodes {
 			'bar' => 'something else',
 		), $atts, NULL );
 
-		$offset = self::get_timezone_offset( self::$sc_defaults['tzid'] );
+		$offset = get_option('gmt_offset');
 
 		return date_sunset(time(), SUNFUNCS_RET_STRING, self::$sc_defaults['latitude'], self::$sc_defaults['longitude'], 90, $offset);
 	}
