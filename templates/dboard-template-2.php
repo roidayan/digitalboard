@@ -63,6 +63,7 @@ $bg_img = DigitalBoard::get_background_image();
   <div class="clock" id="clock1"></div>
 </header>
 
+<div class="parent-container" style="background-image: url('<?php echo $bg_img; ?>')">
 <div class="container" style="background-image: url('<?php echo $bg_img; ?>')">
   <div class="background-image-credit"><?php echo DigitalBoard::get_background_image_credit(); ?></div>
   <div class="wrapper">
@@ -80,6 +81,7 @@ $bg_img = DigitalBoard::get_background_image();
     </div> <!-- /sidebar -->
   </div> <!-- /wrapper -->
 </div> <!-- /container -->
+</div> <!-- /parent-container -->
 
 <?php
 //	echo "<footer></footer>";

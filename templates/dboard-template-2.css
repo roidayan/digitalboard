@@ -34,16 +34,20 @@ header {
     color: white;
     background-color: black;
 }
-.container{
+.parent-container {
       background-color: darkgreen;
+}
+.parent-container,
+.container {
       background-size: cover;
       position: absolute;
       top: 50px;  /* Height of header */
       left: 0;
       bottom: 0;
-      right: 0;    
+      right: 0;
       width: 100%;
 }
+.container { top: 0; }
 
 .wrapper {
 	margin-right: 400px;

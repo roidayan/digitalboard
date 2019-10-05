@@ -113,20 +113,25 @@ function init_news_ticker() {
 }
 
 function cycle_single_msgs() {
-	const display_time = 3000;
-	const delay = 1000;
+	const display_time = 5000;
+	const delay = 1000; // delay for the animation.
 
+	container = jQuery(".container");
 	active = jQuery(".msg.active");
 	next = active.next();
+
 	if (next.length == 0)
 		next = jQuery(".msg").first();
 
 	active.removeClass( 'fadeIn' ).addClass( 'animated fadeOut' );
+	container.removeClass( 'fadeIn' ).addClass( 'animated fadeOut' );
 	setTimeout(function(){
 		active.removeClass("active");
 		next.addClass("active");
 		next.removeClass( 'fadeOut' ).show().addClass( 'animated fadeIn' );
+		container.removeClass( 'fadeOut' ).addClass( 'animated fadeIn' );
+		dboard_set_background_image( next.data().img );
 
-		setTimeout(cycle_single_msgs, display_time);
+		setTimeout(cycle_single_msgs, display_time + delay);
 	}, delay);
 }

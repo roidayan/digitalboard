@@ -273,6 +273,7 @@ class DigitalBoard {
 				'public' => true,
 				'has_archive' => true,
 				'menu_icon' => 'dashicons-format-aside',
+				'supports' => array('title', 'editor', 'thumbnail'),
 			)
 		);
 	}
@@ -305,7 +306,8 @@ class DigitalBoard {
 		foreach( $selected_post_id as $p ) {
 			$post = get_post( $p );
 			setup_postdata( $post );
-			echo "<div class=\"$class\">";
+			$img = self::get_background_image();
+			echo "<div class=\"$class\" data-img=\"$img\">";
 			the_title( '<h3>', '</h3>' );
 			the_content();
 			echo "</div>";
