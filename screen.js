@@ -47,7 +47,9 @@ function dboard_refresh_data( data ) {
 	jQuery( '.weather-line .icon img' ).attr( 'src', data.dboard.weather_icon );
 	jQuery( 'header .date').html( data.dboard.current_date );
 
-	dboard_set_background_image( data );
+	if (data.dboard.background_image)
+		dboard_set_background_image( data.dboard.background_image,
+					     data.dboard.background_image_credit );
 
 	if ( data.dboard.news_ticker ) {
 		jQuery('.breaking-news-ticker').replaceWith( data.dboard.news_ticker );
@@ -55,18 +57,21 @@ function dboard_refresh_data( data ) {
 	}
 }
 
-function dboard_set_background_image( data ) {
-	if ( ! data.dboard.background_image )
-		return;
-
-	var url = 'url("'+data.dboard.background_image+'")';
+function dboard_set_background_image( img, credit ) {
+	var url = 'url("'+img+'")';
 	var cur = jQuery( '.container' ).css( 'background-image' );
+
 	if ( cur != url ) {
-		jQuery('<img/>').attr('src', data.dboard.background_image).on('load', function(){
-			jQuery(this).remove();
-			jQuery('.container').css('background-image', url);
-			jQuery('.background-image-credit').html( data.dboard.background_image_credit );
-		});
+		if (img) {
+			jQuery('<img/>').attr('src', img).on('load', function(){
+				jQuery(this).remove();
+				jQuery('.container').css('background-image', url);
+				jQuery('.background-image-credit').html( credit );
+			});
+		} else {
+			jQuery('.container').css('background-image', '');
+			jQuery('.background-image-credit').html('');
+		}
 	}
 }
 
