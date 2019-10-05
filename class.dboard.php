@@ -58,6 +58,10 @@ class DigitalBoard {
 	}
 
 	static function add_featured_image_display_settings( $content, $post_id ) {
+		if ( get_post_type( $post_id ) != DBOARD_SCREEN_POST_TYPE ) {
+			return $content;
+		}
+
 		$field_id    = self::$meta_key_use_image_provider;
 		$field_value = esc_attr( get_post_meta( $post_id, $field_id, true ) );
 		$field_text  = esc_html__( 'Use image provider' );
