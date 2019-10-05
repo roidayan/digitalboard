@@ -5,6 +5,7 @@ class Hebcal {
 	var $hebcal_remote_url = 'http://www.hebcal.com/hebcal/';
 	var $shabbat_remote_url = 'http://www.hebcal.com/shabbat/';
 	var $date_converter_remote_url = 'http://www.hebcal.com/converter/';
+	var $lg = 'h';
 
 	static function get_instance() {
 		if ( ! self::$instance )
@@ -41,6 +42,7 @@ class Hebcal {
 		    'v'     => '1',
 		    'cfg'   => 'json',
 		    'year'  => 'now',
+		    'lg'    => $this->lg,
 		    'month' => $month, // 'x' for entire year.
 		);
 
@@ -69,14 +71,15 @@ class Hebcal {
 		$candle_remote_url = $this->hebcal_remote_url . '?c=on&s=on&nx=on&m=50&D=on&d=on';
 
 		$params = array(
-		    'v'         => '1',
-		    'cfg'       => 'json',
-		    'year'      => 'now',
-		    'geo'       => 'pos',
-		    'month'     => $month,
-		    'latitude'  => 31,
-		    'longitude' => 35,
-		    'tzid'      => 'Asia/Jerusalem',
+			'v'         => '1',
+			'cfg'       => 'json',
+			'lg'        => $this->lg,
+			'year'      => 'now',
+			'geo'       => 'pos',
+			'month'     => $month,
+			'latitude'  => 31,
+			'longitude' => 35,
+			'tzid'      => 'Asia/Jerusalem',
 		);
 
 		return $this->get_resource($candle_remote_url, $params);
@@ -90,12 +93,13 @@ class Hebcal {
 		$shabbat_remote_url = $this->shabbat_remote_url . '?';
 
 		$params = array(
-		    'cfg'       => 'json',
-		    'm'         => 50,
-		    'geo'       => 'pos',
-		    'latitude'  => 31,
-		    'longitude' => 35,
-		    'tzid'      => 'Asia/Jerusalem'
+			'cfg'       => 'json',
+			'lg'        => $this->lg,
+			'm'         => 50,
+			'geo'       => 'pos',
+			'latitude'  => 31,
+			'longitude' => 35,
+			'tzid'      => 'Asia/Jerusalem'
 		);
 
 		return $this->get_resource($shabbat_remote_url, $params);
