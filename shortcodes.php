@@ -14,8 +14,8 @@ function get_hebcal() {
 
 class SunTimesShortcodes {
 	static $sc_defaults = array(
-		'latitude'  => 31,
-		'longitude' => 35,
+		'latitude'  => 32.08088,
+		'longitude' => 34.78057,
 		'tzid'      => 'Asia/Jerusalem',
 		'offset'    => 2,
 	);
