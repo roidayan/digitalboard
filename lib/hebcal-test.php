@@ -3,7 +3,7 @@
 require_once('hebcal.php');
 
 $hebcal = new Hebcal();
-print_r( $hebcal->shabat() );
+print_r( $hebcal->shabbat() );
 //print_r( $hebcal->candles() );
 $gy = date('Y');
 $gm = date('m');

@@ -95,14 +95,14 @@ class HebcalShortcodes {
 
 	static function parashat() {
 		$h = get_hebcal();
-		$data = $h->shabat();
+		$data = $h->shabbat();
 		$item = self::get_item_by_category($data['items'], 'parashat');
 		return $item['title'];
 	}
 
 	static function candles() {
 		$h = get_hebcal();
-		$data = $h->shabat();
+		$data = $h->shabbat();
 		$item = self::get_item_by_category($data['items'], 'candles');
 		$date2 = sc_format_date( $item['date'] );
 		return $item['title'] . " $date2";
@@ -110,7 +110,7 @@ class HebcalShortcodes {
 
 	static function havdalah() {
 		$h = get_hebcal();
-		$data = $h->shabat();
+		$data = $h->shabbat();
 		$item = self::get_item_by_category($data['items'], 'havdalah');
 		$date2 = sc_format_date( $item['date'] );
 		return $item['title'] . " $date2";

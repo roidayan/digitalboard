@@ -84,9 +84,9 @@ class Hebcal {
 		return $this->get_resource($candle_remote_url, $params);
 	}
 
-	function shabat() {
+	function shabbat() {
 		/**
-		 * Shabat times
+		 * Shabbat times
 		 * https://www.hebcal.com/home/197/shabbat-times-rest-api
 		 */
 		$shabbat_remote_url = $this->shabbat_remote_url . '?';
