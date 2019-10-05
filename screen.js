@@ -106,3 +106,22 @@ function init_news_ticker() {
 		height: '50px',
 		fontSize: '1.5em'});
 }
+
+function cycle_single_msgs() {
+	const display_time = 3000;
+	const delay = 1000;
+
+	active = jQuery(".msg.active");
+	next = active.next();
+	if (next.length == 0)
+		next = jQuery(".msg").first();
+
+	active.removeClass( 'fadeIn' ).addClass( 'animated fadeOut' );
+	setTimeout(function(){
+		active.removeClass("active");
+		next.addClass("active");
+		next.removeClass( 'fadeOut' ).show().addClass( 'animated fadeIn' );
+
+		setTimeout(cycle_single_msgs, display_time);
+	}, delay);
+}

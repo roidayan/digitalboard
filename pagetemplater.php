@@ -75,6 +75,7 @@ class PageTemplater {
 		// Add your templates to this array.
 		$this->templates = array(
 			'templates/dboard-template-1.php' => 'Digital Board Template 1',
+			'templates/dboard-template-2.php' => 'Digital Board Template 2',
 		);
 
 	}
