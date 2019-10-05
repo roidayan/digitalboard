@@ -56,13 +56,24 @@ define('Wed', 'רביעי');
 define('Thu', 'חמישי');
 define('Fri', 'שישי');
 define('Sat', 'שבת');
+define('Day', 'יום');
+
+function heb_day_map($day) {
+	$dayMap = array(Sun, Mon, Tue, Wed, Thu, Fri, Sat);
+	return $dayMap[$day];
+}
+
+function sc_format_date($date) {
+	$time = strtotime($date);
+	$format = 'l, j בF Y';
+	return date_i18n( $format, $time );
+}
+
 
 class HebcalShortcodes {
 	static function dayname() {
-		$dayMap = array(Sun, Mon, Tue, Wed, Thu, Fri, Sat);
-		$d = intval( date('w') );
-		$h = $dayMap[$d];
-		return 'יום ' . $h;
+		$h = date_i18n( 'l' );
+		return Day . " $h";
 	}
 
 	static function hebdate() {
@@ -73,15 +84,36 @@ class HebcalShortcodes {
 		return $h->date_convert($gy, $gm, $gd)['hebrew'];
 	}
 
-	static function parashat() {
-		$h = get_hebcal();
-		$items = $h->calendar_today();
+	static function get_item_by_category($items, $category) {
 		foreach( $items as $item ) {
-			if ($item['category'] == 'parashat') {
-				return $item['hebrew'];
+			if ($item['category'] == $category) {
+				return $item;
 			}
 		}
-		return '';
+		return NULL;
+	}
+
+	static function parashat() {
+		$h = get_hebcal();
+		$data = $h->shabat();
+		$item = self::get_item_by_category($data['items'], 'parashat');
+		return $item['title'];
+	}
+
+	static function candles() {
+		$h = get_hebcal();
+		$data = $h->shabat();
+		$item = self::get_item_by_category($data['items'], 'candles');
+		$date2 = sc_format_date( $item['date'] );
+		return $item['title'] . " $date2";
+	}
+
+	static function havdalah() {
+		$h = get_hebcal();
+		$data = $h->shabat();
+		$item = self::get_item_by_category($data['items'], 'havdalah');
+		$date2 = sc_format_date( $item['date'] );
+		return $item['title'] . " $date2";
 	}
 }
 
@@ -91,3 +123,5 @@ add_shortcode( 'sunset', array( 'SunTimesShortcodes', 'sunset' ) );
 add_shortcode( 'hebday', array( 'HebcalShortcodes', 'dayname' ) );
 add_shortcode( 'hebdate', array( 'HebcalShortcodes', 'hebdate' ) );
 add_shortcode( 'parashat', array( 'HebcalShortcodes', 'parashat' ) );
+add_shortcode( 'candles', array( 'HebcalShortcodes', 'candles' ) );
+add_shortcode( 'havdalah', array( 'HebcalShortcodes', 'havdalah' ) );
