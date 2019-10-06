@@ -25,6 +25,58 @@ function tpl_scripts() {
 add_action( 'wp_enqueue_scripts', array( 'DigitalBoard', 'enqueue_scripts' ), 20 );
 add_action( 'wp_enqueue_scripts', 'tpl_scripts', 20 );
 
+function get_post_by_slug($slug) {
+	$args = array(
+		'name'           => $slug,
+		'post_type'      => DBOARD_MSG_POST_TYPE,
+		'post_status'    => 'publish',
+		'posts_per_page' => 1
+	);
+	$my_posts = get_posts( $args );
+	return array_shift($my_posts);
+}
+
+function get_post_thumbnail($post_id) {
+	return wp_get_attachment_url( get_post_thumbnail_id( $post_id ), 'thumbnail' );
+}
+
+function show_holiday_page( $class ) {
+	$h = Hebcal::get_instance();
+	$items = $h->calendar_today('holiday','major');
+
+	if (!$items)
+		return;
+
+	$item = $items[0];
+	$slug = basename($item['link']);
+	$post = get_post_by_slug($slug);
+	if ($post)
+		$img = get_post_thumbnail($post->ID);
+	else
+		$img = "";
+	$title = $item['title'];
+	$content = "";
+
+	/*
+	 * major
+	 * rosh-hashana
+	 * yom-kippur
+	 * sukkot
+	 * shmini-atzeret
+	 * simchat-torah
+	 * chanukah
+	 * purim
+	 * pesach
+	 * shavuot
+	 * tisha-bav
+	 */
+
+	echo "<div class=\"$class\" data-img=\"$img\">";
+	echo "<h3>$title</h3>";
+	echo $content;
+	echo "</div>";
+}
+
 ?><!DOCTYPE html>
 <html <?php language_attributes(); ?> class="no-js no-svg">
 <head>
@@ -69,7 +121,10 @@ $bg_img = DigitalBoard::get_background_image();
   <div class="background-image-credit"><?php echo DigitalBoard::get_background_image_credit(); ?></div>
   <div class="wrapper">
     <div class="sidebar-msgs">
-      <?php DigitalBoard::show_msgs( "msg widget hide" ); ?>
+	<?php
+	DigitalBoard::show_msgs( "msg widget hide" );
+	show_holiday_page( "msg widget hide" );
+	?>
     </div> <!-- /sidebar-msgs -->
     <div class="sidebar">
 <?php if ( is_active_sidebar( DigitalBoard::get_sidebar_id() ) ) : ?>
