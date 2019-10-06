@@ -4,11 +4,9 @@
  */
 
 require_once("lib/hebcal.php");
-$hebcal = new Hebcal();
 
 function get_hebcal() {
-	global $hebcal;
-	return $hebcal;
+	return Hebcal::get_instance();
 }
 
 
