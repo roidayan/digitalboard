@@ -21,11 +21,22 @@ jQuery(document).ready(function( $ ) {
 }).on( 'heartbeat2-tick', function ( event, data ) {
 	dboard_refresh_data( data );
 }).on( 'midnight', function() {
+	if (dboard_refresh_at_midnight) {
+		console.log('refresh at midnight')
+		location.reload();
+		return;
+	}
 	window.heartbeat2.connectNow();
 });
 
 var dboard_page_version = 0;
 var dboard_last_rss_item = '';
+var dboard_refresh_at_midnight = false;
+
+
+function refresh_at_midnight() {
+	dboard_refresh_at_midnight = true;
+}
 
 function dboard_refresh_data( data ) {
 	if ( ! data.dboard ) {

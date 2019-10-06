@@ -50,6 +50,7 @@ $bg_img = DigitalBoard::get_background_image();
 	var pagenow = <?php the_ID(); ?>;
 	jQuery(document).ready(function( $ ) {
 		cycle_single_msgs();
+		refresh_at_midnight();
 	});
 </script>
 </head>
