@@ -65,7 +65,7 @@ function sc_format_date($date) {
 class HebcalShortcodes {
 	static function dayname() {
 		$h = date_i18n( 'l' );
-		return Day . " $h";
+		return $h;
 	}
 
 	static function hebdate() {
