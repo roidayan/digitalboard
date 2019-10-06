@@ -15,6 +15,16 @@ class Hebcal {
 		return self::$instance;
 	}
 
+	function __construct() {
+		if (function_exists('get_locale')) {
+			$a = get_locale();
+			if ($a == 'he_IL')
+				$this->lg = 'h';
+			else
+				$this->lg = 's';
+		}
+	}
+
 	function get_resource($url, $params) {
 		$query = http_build_query($params, NULL, '&', PHP_QUERY_RFC3986);
 		$url = "$url&$query";
