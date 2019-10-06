@@ -60,7 +60,7 @@ class Hebcal {
 		return $this->get_resource($cal_remote_url, $params);
 	}
 
-	function calendar_today() {
+	function calendar_today( $category='', $subcat='' ) {
 		$data = $this->calendar( date('m') );
 		// item date might contain time so need to parse it
 		$today = date('Y-m-d');
@@ -68,7 +68,11 @@ class Hebcal {
 
 		foreach( $data['items'] as $item ) {
 			if ($item['date'] == $today) {
-				$items[] = $item;
+				if ((!$category || ($category && $category == $item['category'])) &&
+				    (!$subcat || (array_key_exists('subcat', $item) &&
+						  $subcat == $item['subcat']))) {
+					$items[] = $item;
+				}
 			}
 		}
 
