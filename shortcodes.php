@@ -4,6 +4,7 @@
  */
 
 require_once("lib/hebcal.php");
+require_once("lib/converter.php");
 
 function get_hebcal() {
 	return Hebcal::get_instance();
@@ -67,11 +68,7 @@ class HebcalShortcodes {
 	}
 
 	static function hebdate() {
-		$h = get_hebcal();
-		$gy = date('Y');
-		$gm = date('m');
-		$gd = date('d');
-		return $h->date_convert($gy, $gm, $gd)['hebrew'];
+		return g2h_today();
 	}
 
 	static function get_item_by_category($items, $category) {
