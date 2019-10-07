@@ -265,6 +265,32 @@ class DigitalBoard {
 	static function create_post_types() {
 		self::create_msg_post_type();
 		self::create_screen_post_type();
+		self::create_soul_post_type();
+		add_filter( 'manage_'.DBOARD_SOUL_POST_TYPE.'_posts_columns',
+			    array( 'DigitalBoard', 'manage_soul_columns' ) ) ;
+	}
+
+	static function manage_soul_columns($columns) {
+		 return array(
+			 'cb' => '<input type="checkbox" />',
+			 'title' => __('Title'),
+			 'hebdate' => __('Hebrew Date'),
+		 );
+	}
+
+	static function create_soul_post_type() {
+		register_post_type( DBOARD_SOUL_POST_TYPE,
+			array(
+				'labels' => array(
+					'name' => __( 'Soul' ),
+					'singular_name' => __( 'Soul' )
+				),
+				'public' => true,
+				'has_archive' => true,
+				'menu_icon' => 'dashicons-format-aside',
+				'supports' => array('title', 'editor'),
+			)
+		);
 	}
 
 	static function create_msg_post_type() {

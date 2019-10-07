@@ -39,6 +39,8 @@ define( 'DBOARD_MSG_POST_TYPE', 'dboard_msg' );
 define( 'DBOARD_SCREEN_POST_TYPE', 'dboard_screen' );
 define( 'DBOARD_SIDEBAR', 'sidebar-dboard' );
 
+define( 'DBOARD_SOUL_POST_TYPE', 'dboard_soul' );
+
 require_once( DBOARD_PLUGIN_DIR . 'class.dboard.php' );
 require_once( DBOARD_PLUGIN_DIR . 'class.heartbeat2.php' );
 require_once( DBOARD_PLUGIN_DIR . 'class.settings.php' );
