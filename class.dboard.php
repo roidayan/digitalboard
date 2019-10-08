@@ -342,7 +342,7 @@ class DigitalBoard {
 			the_content();
 			echo "</div>";
 		}
-		wp_reset_postdata( $post );
+		wp_reset_postdata();
 	}
 
 	static function get_sidebar_id( $post=0 ) {
