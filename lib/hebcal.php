@@ -79,6 +79,29 @@ class Hebcal {
 		return $items;
 	}
 
+	function calendar_today_major_holiday() {
+		$tags = [
+			'rosh-hashana',
+			'yom-kippur',
+			'sukkot',
+			'shmini-atzeret',
+			'simchat-torah',
+			'chanukah',
+			'purim',
+			'pesach',
+			'shavuot',
+			'tisha-bav',
+		];
+		$allitems = $this->calendar_today('holiday');
+		$items = array();
+		foreach( $allitems as $item ) {
+			$slug = basename($item['link']);
+			if (in_array($slug, $tags))
+				$items[] = $item;
+		}
+		return $items;
+	}
+
 	function candles($month='x') {
 		/**
 		 * Candle lighting times

@@ -42,36 +42,26 @@ function get_post_thumbnail($post_id) {
 
 function show_holiday_page( $class ) {
 	$h = Hebcal::get_instance();
-	$items = $h->calendar_today('holiday','major');
-
+	$items = $h->calendar_today_major_holiday();
 	if (!$items)
 		return;
 
 	$item = $items[0];
-	$slug = basename($item['link']);
-	$post = get_post_by_slug($slug);
-	if ($post)
-		$img = get_post_thumbnail($post->ID);
-	else
-		$img = "";
 	$title = $item['title'];
-	$content = "";
-
-	/*
-	 * major
-	 * rosh-hashana
-	 * yom-kippur
-	 * sukkot
-	 * shmini-atzeret
-	 * simchat-torah
-	 * chanukah
-	 * purim
-	 * pesach
-	 * shavuot
-	 * tisha-bav
-	 */
-
-	echo "<div class=\"$class\" data-img=\"$img\">";
+	$slug = basename($item['link']);
+	global $post;
+	$post = get_post_by_slug($slug);
+	if ($post) {
+		setup_postdata( $post );
+		$img = get_post_thumbnail($post->ID);
+		$content = $post->post_content;
+		$content = apply_filters('the_content', $content);
+		wp_reset_postdata();
+	} else {
+		$img = "";
+		$content = "";
+	}
+	echo "<div class=\"$class $slug\" data-img=\"$img\">";
 	echo "<h3>$title</h3>";
 	echo $content;
 	echo "</div>";
