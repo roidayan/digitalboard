@@ -52,8 +52,13 @@ class MB_SoulMemorialDay {
 		echo "<th><label for=\"$id\">$text</label></th>";
 		echo "<td><input id=\"$id\" name=\"{$this->field_name}\" class=\"regular-text\" value=\"$value\"></input></td>";
 		echo "</table>";
-		if ($value)
-			print h2g($value);
+		if ($value) {
+			$greg = h2g($value);
+			if ($greg)
+				print $greg;
+			else
+				print __('Invalid date');
+		}
 	}
 
 	function save_post( $post_id, $post ) {

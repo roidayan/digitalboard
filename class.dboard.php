@@ -284,7 +284,10 @@ class DigitalBoard {
 		if ($column_name == 'memorial-day') {
 			$meta_key     = "soul_memorial_day";
 			$memorial_day = get_post_meta( $post_id, $meta_key, true );
-			print $memorial_day;
+			$greg = h2g($memorial_day);
+			if (!$greg)
+				$greg = __('Invalid date');
+			print "$memorial_day ($greg)";
 		}
 	}
 
