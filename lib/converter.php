@@ -25,13 +25,16 @@ function heb_str_to_num($value) {
 	$c = 0;
 	for ($i=0; $i < mb_strlen($value); $i++) {
 		$ltr = mb_substr($value, $i, 1);
-		$c += $hebnum_ltrs[$ltr];
+		if (array_key_exists($ltr, $hebnum_ltrs))
+			$c += $hebnum_ltrs[$ltr];
 	}
 	return $c;
 }
 
 function heb_month_to_num($hm, $hy) {
 	global $hnum_to_str2;
+	if (!array_key_exists($hm, $hnum_to_str2))
+		return false;
 	$num = $hnum_to_str2[$hm];
 	if ($num == 6 && !is_leap_year($hy))
 		$num = 7;
@@ -54,6 +57,8 @@ function h2g($hebdate) {
 	if ($hy < 1000)
 		$hy+=5000;
 	$hm = heb_month_to_num($hm, $hy);
+	if (!$hm)
+		return false;
 //	print $hd . " " . $hm . " " . $hy . "<br>";
 	$jd = jewishtojd($hm, $hd, $hy);
 	$greg = jdtogregorian($jd);
