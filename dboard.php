@@ -49,6 +49,7 @@ require_once( DBOARD_PLUGIN_DIR . 'class.openweathermap.php' );
 require_once( DBOARD_PLUGIN_DIR . 'checklist-pages.php' );
 require_once( DBOARD_PLUGIN_DIR . 'pagetemplater.php' );
 require_once( DBOARD_PLUGIN_DIR . 'mb-msgs.php' );
+require_once( DBOARD_PLUGIN_DIR . 'mb-memorial-day.php' );
 require_once( DBOARD_PLUGIN_DIR . 'shortcodes.php' );
 
 Heartbeat2::init();
