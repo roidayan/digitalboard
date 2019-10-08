@@ -4,7 +4,7 @@ require("common.php");
 require("hebnum.php");
 
 function g2h($gm, $gd, $gy) {
-	global $hnum_to_str, $hebnum_months_inprefix;
+	global $hnum_to_str;
 	$jd = gregoriantojd($gm, $gd, $gy);
 	$hebdate = jdtojewish($jd);
 	list($hmnum, $hd, $hy) = explode("/", $hebdate, 3);
@@ -12,7 +12,7 @@ function g2h($gm, $gd, $gy) {
 	$hebdate = jdtojewish($jd, true, CAL_JEWISH_ADD_GERESHAYIM);
 	$hebdate = iconv('WINDOWS-1255', 'UTF-8', $hebdate);
 	list($hd, $hm2, $hy) = explode(" ", $hebdate, 3);
-	$hm = $hebnum_months_inprefix[$hm];
+	$hm = hebrew_month_prefix($hm);
 	return "$hd $hm $hy";
 }
 

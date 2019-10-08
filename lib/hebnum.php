@@ -147,9 +147,7 @@ function hebnum_to_string($num)
     return $result;
 }
 
-
-function build_hebrew_date($hm, $hd, $hy)
-{
+function hebrew_month_prefix($hm) {
     global $hebnum_months;
     global $hebnum_months_inprefix;
 
@@ -157,7 +155,12 @@ function build_hebrew_date($hm, $hd, $hy)
 	? $hebnum_months_inprefix[$hm]
 	: "\327\221\326\274\326\260" . $hebnum_months[$hm];
 
-    return hebnum_to_string($hd) . " " . $month_inprefix . " " . hebnum_to_string($hy);
+    return $month_inprefix;
 }
 
-?>
+function build_hebrew_date($hm, $hd, $hy)
+{
+    $month_inprefix = hebrew_month_prefix($hm);
+
+    return hebnum_to_string($hd) . " " . $month_inprefix . " " . hebnum_to_string($hy);
+}
