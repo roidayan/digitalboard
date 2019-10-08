@@ -59,7 +59,8 @@ function dboard_refresh_data( data ) {
 	jQuery( 'header .date').html( data.dboard.current_date );
 
 	if (data.dboard.background_image)
-		dboard_set_background_image( data.dboard.background_image,
+		dboard_set_background_image( '.container',
+					     data.dboard.background_image,
 					     data.dboard.background_image_credit );
 
 	if ( data.dboard.news_ticker ) {
@@ -68,19 +69,20 @@ function dboard_refresh_data( data ) {
 	}
 }
 
-function dboard_set_background_image( img, credit ) {
+function dboard_set_background_image( selector, img, credit ) {
 	var url = 'url("'+img+'")';
-	var cur = jQuery( '.container' ).css( 'background-image' );
+	var container = jQuery( selector );
+	var cur = container.css( 'background-image' );
 
 	if ( cur != url ) {
 		if (img) {
 			jQuery('<img/>').attr('src', img).on('load', function(){
 				jQuery(this).remove();
-				jQuery('.container').css('background-image', url);
+				container.css('background-image', url);
 				jQuery('.background-image-credit').html( credit );
 			});
 		} else {
-			jQuery('.container').css('background-image', '');
+			container.css('background-image', '');
 			jQuery('.background-image-credit').html('');
 		}
 	}
@@ -126,8 +128,9 @@ function init_news_ticker() {
 function cycle_single_msgs() {
 	const display_time = 5000;
 	const delay = 1000; // delay for the animation.
+	const selector = ".msg-container";
 
-	container = jQuery(".container");
+	container = jQuery(selector);
 	active = jQuery(".msg.active");
 	next = active.next();
 
@@ -141,7 +144,7 @@ function cycle_single_msgs() {
 		next.addClass("active");
 		next.removeClass( 'fadeOut' ).show().addClass( 'animated fadeIn' );
 		container.removeClass( 'fadeOut' ).addClass( 'animated fadeIn' );
-		dboard_set_background_image( next.data().img );
+		dboard_set_background_image( selector, next.data().img );
 
 		setTimeout(cycle_single_msgs, display_time + delay);
 	}, delay);

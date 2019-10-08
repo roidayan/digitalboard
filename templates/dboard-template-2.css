@@ -34,10 +34,10 @@ header {
     color: white;
     background-color: black;
 }
-.parent-container {
+.container {
       background-color: darkgreen;
 }
-.parent-container,
+.msg-container,
 .container {
       background-size: cover;
       position: absolute;
@@ -47,7 +47,7 @@ header {
       right: 0;
       width: 100%;
 }
-.container { top: 0; }
+.msg-container { top: 0; }
 
 .wrapper {
 	margin-right: 400px;
