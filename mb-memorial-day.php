@@ -6,6 +6,9 @@
  * @package DigitalBoard
  */
 
+require_once("lib/converter.php");
+
+
 class MB_SoulMemorialDay {
 	var $FOR_POST_TYPE = DBOARD_SOUL_POST_TYPE;
 	var $box_id;
@@ -49,8 +52,8 @@ class MB_SoulMemorialDay {
 		echo "<th><label for=\"$id\">$text</label></th>";
 		echo "<td><input id=\"$id\" name=\"{$this->field_name}\" class=\"regular-text\" value=\"$value\"></input></td>";
 		echo "</table>";
-//		$strip = 'אבגדהוזחטיכלמנסעפצקרשת ';
-//		echo preg_replace('/[^'.$strip.']/', "", $value);
+		if ($value)
+			print h2g($value);
 	}
 
 	function save_post( $post_id, $post ) {

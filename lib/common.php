@@ -42,6 +42,24 @@ $hmstr_to_num = array(
 $hnum_to_str = array_flip($hmstr_to_num);
 $hmstr_to_num["Adar"] = 6;
 
+$hmstr_to_num2 = array(
+	1 => 'תשרי',
+	2 => 'חשון',
+	3 => 'כסלו',
+	4 => 'טבת',
+	5 => 'שבט',
+	6 => 'אדר א',
+	7 => 'אדר ב',
+	8 => 'ניסן',
+	9 => 'אייר',
+	10 => 'סיוון',
+	11 => 'תמוז',
+	12 => 'אב',
+	13 => 'אלול',
+);
+
+$hnum_to_str2 = array_flip($hmstr_to_num2);
+
 
 function is_leap_year($hyear) {
 	return (1 + ($hyear * 7)) % 19 < 7 ? true : false;

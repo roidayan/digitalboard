@@ -59,6 +59,8 @@ $hebnum_numbers = array(
     400 => "\327\252",
     );
 
+$hebnum_ltrs = array_flip($hebnum_numbers);
+
 $hebnum_months = array(
     "Nisan"     => "\327\240\326\264\327\231\327\241\326\270\327\237",
     "Iyyar"     => "\327\220\326\264\327\231\326\270\327\231\327\250",
