@@ -48,7 +48,7 @@ function heb_year_today() {
 	return $hy;
 }
 
-function h2g($hebdate, $this_year=false) {
+function h2g($hebdate, $hy2='') {
 	$heb_ltrs = 'אבגדהוזחטיכלמנסעפצקרשתךףןץ ';
 	$hebdate = preg_replace('/[^'.$heb_ltrs.']/', "", $hebdate);
 	$ex = explode(' ', $hebdate, 4);
@@ -60,8 +60,8 @@ function h2g($hebdate, $this_year=false) {
 	}
 //	print $hd . " " . $hm . " " . $hy . "<br>";
 	$hd = heb_str_to_num($hd);
-	if ($this_year) {
-		$hy = heb_year_today();
+	if ($hy2) {
+		$hy = $hy2;
 	} else {
 		$hy = heb_str_to_num($hy);
 		if ($hy < 1000)
@@ -73,6 +73,30 @@ function h2g($hebdate, $this_year=false) {
 //	print $hd . " " . $hm . " " . $hy . "<br>";
 	$jd = jewishtojd($hm, $hd, $hy);
 	$greg = jdtogregorian($jd);
-	list($gm, $gd, $gy) = explode("/", $greg, 3);
-	return "$gd/$gm/$gy";
+	return $greg;
+}
+
+function h2g_year($hebdate, $hy) {
+	$cdate = h2g($hebdate, $hy);
+	return strtotime($cdate);
+}
+
+function h2g_next($hebdate) {
+	$hy = heb_year_today();
+	$ctime = h2g_year($hebdate, $hy);
+	$difference = $ctime - time();
+
+	if ($difference < 0) {
+		$hy++;
+		$ctime = h2g_year($hebdate, $hy);
+	}
+
+	return $ctime;
+}
+
+function seconds_to_days($seconds) {
+	$secondsInAMinute = 60;
+	$secondsInAnHour  = 60 * $secondsInAMinute;
+	$secondsInADay    = 24 * $secondsInAnHour;
+	return floor($seconds / $secondsInADay);
 }

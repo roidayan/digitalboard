@@ -54,10 +54,13 @@ class MB_SoulMemorialDay {
 		echo "</table>";
 		if ($value) {
 			$greg = h2g($value);
-			if ($greg)
-				print $greg;
-			else
+			if ($greg) {
+				print date("Y-m-d", strtotime($greg));
+				$next = h2g_next($value);
+				print "<br>Next: ".date("Y-m-d", $next);
+			} else {
 				print __('Invalid date');
+			}
 		}
 	}
 
