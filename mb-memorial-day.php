@@ -13,8 +13,9 @@ class MB_SoulMemorialDay {
 	var $FOR_POST_TYPE = DBOARD_SOUL_POST_TYPE;
 	var $box_id;
 	var $box_label;
-	var $meta_key;
 	var $field_name;
+	var $meta_key;
+	var $meta_next_date;
 
 	static function get_instance() {
 		return new self();
