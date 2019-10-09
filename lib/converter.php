@@ -41,7 +41,14 @@ function heb_month_to_num($hm, $hy) {
 	return $num;
 }
 
-function h2g($hebdate) {
+function heb_year_today() {
+	$jd = gregoriantojd(date('m'), date('d'), date('Y'));
+	$hebdate = jdtojewish($jd);
+	list($hm, $hd, $hy) = explode("/", $hebdate, 3);
+	return $hy;
+}
+
+function h2g($hebdate, $this_year=false) {
 	$heb_ltrs = 'אבגדהוזחטיכלמנסעפצקרשתךףןץ ';
 	$hebdate = preg_replace('/[^'.$heb_ltrs.']/', "", $hebdate);
 	$ex = explode(' ', $hebdate, 4);
@@ -53,9 +60,13 @@ function h2g($hebdate) {
 	}
 //	print $hd . " " . $hm . " " . $hy . "<br>";
 	$hd = heb_str_to_num($hd);
-	$hy = heb_str_to_num($hy);
-	if ($hy < 1000)
-		$hy+=5000;
+	if ($this_year) {
+		$hy = heb_year_today();
+	} else {
+		$hy = heb_str_to_num($hy);
+		if ($hy < 1000)
+			$hy+=5000;
+	}
 	$hm = heb_month_to_num($hm, $hy);
 	if (!$hm)
 		return false;
