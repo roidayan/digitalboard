@@ -74,5 +74,5 @@ function h2g($hebdate, $this_year=false) {
 	$jd = jewishtojd($hm, $hd, $hy);
 	$greg = jdtogregorian($jd);
 	list($gm, $gd, $gy) = explode("/", $greg, 3);
-	return "$gd-$gm-$gy";
+	return "$gd/$gm/$gy";
 }
