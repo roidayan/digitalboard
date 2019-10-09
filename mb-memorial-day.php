@@ -27,8 +27,9 @@ class MB_SoulMemorialDay {
 	function admin_init() {
 		$this->box_id       = "metabox-soul-memorial-day";
 		$this->box_label    = __( 'Memorial Day' );
-		$this->meta_key     = "soul_memorial_day";
 		$this->field_name   = "soul_memorial_day";
+		$this->meta_key     = "soul_memorial_day";
+		$this->meta_next_date  = "soul_memorial_day_next";
 		add_action( 'add_meta_boxes', array( $this, 'add_meta_boxes' ) );
 		add_action( 'save_post', array( $this, 'save_post' ), 10, 2 );
 	}
@@ -69,8 +70,15 @@ class MB_SoulMemorialDay {
 			if ( isset( $_POST[$this->field_name] ) ) {
 				$v = esc_attr( $_POST[$this->field_name] );
 				update_post_meta( $post_id, $this->meta_key, $v );
+				$next = date("Y-m-d", h2g_next($value));
+				if ($next) {
+					update_post_meta( $post_id, $this->meta_next_date, $next );
+				} else {
+					delete_post_meta( $post_id, $this->meta_next_date );
+				}
 			} else {
 				delete_post_meta( $post_id, $this->meta_key );
+				delete_post_meta( $post_id, $this->meta_next_date );
 			}
 		}
 	}

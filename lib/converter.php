@@ -84,6 +84,8 @@ function h2g_year($hebdate, $hy) {
 function h2g_next($hebdate) {
 	$hy = heb_year_today();
 	$ctime = h2g_year($hebdate, $hy);
+	if (!$ctime)
+		return false;
 	$difference = $ctime - time();
 
 	if ($difference < 0) {
