@@ -54,9 +54,11 @@ function h2g($hebdate, $hy2='') {
 	$ex = explode(' ', $hebdate, 4);
 	if (count($ex) == 3) {
 		list($hd, $hm, $hy) = $ex;
-	} else {
+	} else if (count($ex) == 4) {
 		list($hd, $hm, $hm2, $hy) = $ex;
 		$hm .= " $hm2";
+	} else {
+		return false;
 	}
 //	print $hd . " " . $hm . " " . $hy . "<br>";
 	$hd = heb_str_to_num($hd);
