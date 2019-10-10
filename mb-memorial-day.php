@@ -71,8 +71,10 @@ class MB_SoulMemorialDay {
 			if ( isset( $_POST[$this->field_name] ) ) {
 				$v = esc_attr( $_POST[$this->field_name] );
 				update_post_meta( $post_id, $this->meta_key, $v );
-				$next = date("Y-m-d", h2g_next($value));
+
+				$next = h2g_next($v);
 				if ($next) {
+					$next = date("Y-m-d", $next);
 					update_post_meta( $post_id, $this->meta_next_date, $next );
 				} else {
 					delete_post_meta( $post_id, $this->meta_next_date );
