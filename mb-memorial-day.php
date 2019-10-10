@@ -23,6 +23,10 @@ class MB_SoulMemorialDay {
 
 	function __construct() {
 		add_action( 'admin_init', array( $this, 'admin_init' ) );
+		add_action( 'soul_memorial_daily_event', array( $this, 'soul_memorial_daily' ) );
+		if (!wp_next_scheduled('soul_memorial_daily_event')) {
+			wp_schedule_event(time(), 'daily', 'soul_memorial_daily_event');
+		}
 	}
 
 	function admin_init() {
@@ -33,6 +37,16 @@ class MB_SoulMemorialDay {
 		$this->meta_next_date  = "soul_memorial_day_next";
 		add_action( 'add_meta_boxes', array( $this, 'add_meta_boxes' ) );
 		add_action( 'save_post', array( $this, 'save_post' ), 10, 2 );
+	}
+
+	function soul_memorial_daily() {
+		$posts = $this->query_old_dates();
+		foreach($posts as $post) {
+			$v = get_post_meta( $post->ID, $this->meta_key, true );
+			if (!$v)
+				continue;
+			$this->save_post_next_date( $post_id, $v );
+		}
 	}
 
 	function add_meta_boxes() {
@@ -87,6 +101,50 @@ class MB_SoulMemorialDay {
 				delete_post_meta( $post_id, $this->meta_next_date );
 			}
 		}
+	}
+
+	function query_next_dates() {
+		$maxdate = strtotime('+7 day');
+		$args = array(
+			'post_type'  => $this->FOR_POST_TYPE,
+			'meta_query' => array(
+				'relation' => 'AND',
+				array(
+					'key'     => $this->meta_next_date,
+					'type'    => 'DATETIME',
+					'value'   => date('Y-m-d'),
+					'compare' => '>=',
+				),
+				array(
+					'key'     => $this->meta_next_date,
+					'type'    => 'DATETIME',
+					'value'   => date('Y-m-d', $maxdate),
+					'compare' => '<=',
+				),
+			),
+		);
+		return get_posts( $args );
+	}
+
+	function query_old_dates() {
+		$args = array(
+			'post_type'  => $this->FOR_POST_TYPE,
+			'meta_query' => array(
+				'relation' => 'OR',
+				array(
+					'key'     => $this->meta_next_date,
+					'type'    => 'DATETIME',
+					'value'   => date('Y-m-d'),
+					'compare' => '<',
+				),
+				array(
+					'key'     => $this->meta_next_date,
+					'value'   => '',
+					'compare' => 'NOT EXISTS',
+				),
+			),
+		);
+		return get_posts( $args );
 	}
 }
 
