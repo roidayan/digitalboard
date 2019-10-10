@@ -108,7 +108,6 @@ $bg_img = DigitalBoard::get_background_image();
 
 <div class="container" style="background-image: url('<?php echo $bg_img; ?>')">
 <div class="msg-container">
-  <div class="background-image-credit"><?php echo DigitalBoard::get_background_image_credit(); ?></div>
   <div class="wrapper">
     <div class="sidebar-msgs">
 	<?php
@@ -127,6 +126,7 @@ $bg_img = DigitalBoard::get_background_image();
     </div> <!-- /sidebar -->
   </div> <!-- /wrapper -->
 </div> <!-- /msg-container -->
+<div class="background-image-credit"><?php echo DigitalBoard::get_background_image_credit(); ?></div>
 </div> <!-- /container -->
 
 <?php

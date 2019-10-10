@@ -32,15 +32,23 @@ header {
     width: 100%;
     background-color: lightgreen;
 }
-.container{
+.container {
       background-color: darkgreen;
+      z-index: 10;
+}
+.msg-container,
+.container {
       background-size: cover;
       position: absolute;
       top: 50px;  /* Height of header */
       left: 0;
       bottom: 0;
-      right: 0;    
+      right: 0;
       width: 100%;
+}
+.msg-container {
+	top: 0;
+	z-index: 20;
 }
 
 .wrapper {
@@ -108,6 +116,7 @@ header .date {
 	border-radius: 7px;
 	background: rgba(255, 255, 255, 0.78);
 	padding: 0 10px;
+	z-index: 11;
 }
 
 .sidebar {
@@ -127,7 +136,7 @@ h3 {
 body.admin-bar footer { margin-bottom: 32px; }
 
 /* news ticker fix */
-.breaking-news-ticker { height: 50px; line-height: 50px; }
+.breaking-news-ticker { height: 50px; line-height: 50px; z-index: 30; }
 .bn-effect-scroll .bn-news ul li { line-height: 50px; }
 .bn-seperator.bn-news-dot { height: 50px; line-height: 50px; }
 .bn-seperator,

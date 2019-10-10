@@ -149,3 +149,10 @@ function cycle_single_msgs() {
 		setTimeout(cycle_single_msgs, display_time + delay);
 	}, delay);
 }
+
+function set_first_msg_image_background() {
+	var first = jQuery(".msg").first();
+	var img = first.data().img;
+	if (img)
+		dboard_set_background_image( ".msg-container", img);
+}

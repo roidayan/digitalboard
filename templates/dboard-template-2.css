@@ -36,6 +36,7 @@ header {
 }
 .container {
       background-color: darkgreen;
+      z-index: 10;
 }
 .msg-container,
 .container {
@@ -47,7 +48,10 @@ header {
       right: 0;
       width: 100%;
 }
-.msg-container { top: 0; }
+.msg-container {
+	top: 0;
+	z-index: 20;
+}
 
 .wrapper {
 	margin-right: 400px;
@@ -112,6 +116,7 @@ header .date {
 	border-radius: 7px;
 	background: rgba(255, 255, 255, 0.78);
 	padding: 0 10px;
+	z-index: 11;
 }
 
 .sidebar {
@@ -134,7 +139,7 @@ body.admin-bar footer { margin-bottom: 32px; }
 .msg.active { display: block; }
 
 /* news ticker fix */
-.breaking-news-ticker { height: 50px; line-height: 50px; }
+.breaking-news-ticker { height: 50px; line-height: 50px; z-index: 30; }
 .bn-effect-scroll .bn-news ul li { line-height: 50px; }
 .bn-seperator.bn-news-dot { height: 50px; line-height: 50px; }
 .bn-seperator,

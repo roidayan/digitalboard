@@ -44,6 +44,9 @@ $bg_img = DigitalBoard::get_background_image();
 
 <script>
 	var pagenow = <?php the_ID(); ?>;
+	jQuery(document).ready(function( $ ) {
+		set_first_msg_image_background();
+	});
 </script>
 </head>
 <body <?php body_class(); ?>>
@@ -57,7 +60,7 @@ $bg_img = DigitalBoard::get_background_image();
 </header>
 
 <div class="container" style="background-image: url('<?php echo $bg_img; ?>')">
-  <div class="background-image-credit"><?php echo DigitalBoard::get_background_image_credit(); ?></div>
+<div class="msg-container">
   <div class="wrapper">
     <div class="sidebar-msgs">
       <?php DigitalBoard::show_msgs( "msg widget" ); ?>
@@ -72,6 +75,8 @@ $bg_img = DigitalBoard::get_background_image();
 <?php endif; ?>
     </div> <!-- /sidebar -->
   </div> <!-- /wrapper -->
+</div> <!-- /msg-container -->
+<div class="background-image-credit"><?php echo DigitalBoard::get_background_image_credit(); ?></div>
 </div> <!-- /container -->
 
 <?php
