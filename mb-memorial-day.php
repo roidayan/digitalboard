@@ -66,19 +66,22 @@ class MB_SoulMemorialDay {
 		}
 	}
 
+	function save_post_next_date( $post_id, $hebdate ) {
+		$next = h2g_next($hebdate);
+		if ($next) {
+			$next = date("Y-m-d", $next);
+			update_post_meta( $post_id, $this->meta_next_date, $next );
+		} else {
+			delete_post_meta( $post_id, $this->meta_next_date );
+		}
+	}
+
 	function save_post( $post_id, $post ) {
 		if ( $post->post_type == $this->FOR_POST_TYPE ) {
 			if ( isset( $_POST[$this->field_name] ) ) {
 				$v = esc_attr( $_POST[$this->field_name] );
 				update_post_meta( $post_id, $this->meta_key, $v );
-
-				$next = h2g_next($v);
-				if ($next) {
-					$next = date("Y-m-d", $next);
-					update_post_meta( $post_id, $this->meta_next_date, $next );
-				} else {
-					delete_post_meta( $post_id, $this->meta_next_date );
-				}
+				$this->save_post_next_date( $post_id, $v );
 			} else {
 				delete_post_meta( $post_id, $this->meta_key );
 				delete_post_meta( $post_id, $this->meta_next_date );
