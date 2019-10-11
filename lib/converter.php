@@ -84,12 +84,11 @@ function h2g($hebdate, $hy2='') {
 //	print $hd . " " . $hm . " " . $hy . "<br>";
 	$jd = jewishtojd($hm, $hd, $hy);
 	$greg = jdtogregorian($jd);
-	return $greg;
+	return date('Y-m-d', strtotime($greg));
 }
 
 function h2g_year($hebdate, $hy) {
-	$cdate = h2g($hebdate, $hy);
-	return strtotime($cdate);
+	return h2g($hebdate, $hy);
 }
 
 function h2g_next($hebdate) {
@@ -97,7 +96,14 @@ function h2g_next($hebdate) {
 	$ctime = h2g_year($hebdate, $hy);
 	if (!$ctime)
 		return false;
-	$difference = $ctime - time();
+
+	$dt = new DateTime($ctime);
+	$today = new DateTime(date('Y-m-d'));
+	if ($dt < $today)
+		$difference = -1;
+	else
+		$difference = $dt->diff($today)->days;
+//	print "<br>".$difference."<br>";
 
 	if ($difference < 0) {
 		$hy++;

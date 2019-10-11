@@ -76,9 +76,9 @@ class MB_SoulMemorialDay {
 		if ($value) {
 			$greg = h2g($value);
 			if ($greg) {
-				print date("Y-m-d", strtotime($greg));
+				print $greg;
 				$next = h2g_next($value);
-				print "<br>Next: ".date("Y-m-d", $next);
+				print "<br>Next: $next";
 			} else {
 				print __('Invalid date');
 			}
@@ -88,7 +88,6 @@ class MB_SoulMemorialDay {
 	function save_post_next_date( $post_id, $hebdate ) {
 		$next = h2g_next($hebdate);
 		if ($next) {
-			$next = date("Y-m-d", $next);
 			update_post_meta( $post_id, $this->meta_next_date, $next );
 		} else {
 			delete_post_meta( $post_id, $this->meta_next_date );
