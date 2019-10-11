@@ -67,6 +67,25 @@ function show_holiday_page( $class ) {
 	echo "</div>";
 }
 
+function show_soul_pages( $class ) {
+	$ilui_nishmat = 'לעילוי נשמת';
+	$s = MB_SoulMemorialDay::get_instance();
+	$posts = $s->query_next_dates();
+	$meta_key = "soul_memorial_day";
+	global $post;
+	foreach($posts as $post) {
+		setup_postdata( $post );
+		$date = get_post_meta( $post->ID, $meta_key, true );
+		$img = "";
+		echo "<div class=\"$class ilui-nishmat\" data-img=\"$img\">";
+		echo "<h3>$ilui_nishmat</h3>";
+		echo "<div>$post->post_title</div>";
+		echo "<div>$date</div>";
+		echo "</div>";
+	}
+	wp_reset_postdata();
+}
+
 ?><!DOCTYPE html>
 <html <?php language_attributes(); ?> class="no-js no-svg">
 <head>
@@ -113,6 +132,7 @@ $bg_img = DigitalBoard::get_background_image();
 	<?php
 	DigitalBoard::show_msgs( "msg widget hide" );
 	show_holiday_page( "msg widget hide" );
+	show_soul_pages( "msg widget hide" );
 	?>
     </div> <!-- /sidebar-msgs -->
     <div class="sidebar">
