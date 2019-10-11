@@ -112,10 +112,3 @@ function h2g_next($hebdate) {
 
 	return $ctime;
 }
-
-function seconds_to_days($seconds) {
-	$secondsInAMinute = 60;
-	$secondsInAnHour  = 60 * $secondsInAMinute;
-	$secondsInADay    = 24 * $secondsInAnHour;
-	return floor($seconds / $secondsInADay);
-}
