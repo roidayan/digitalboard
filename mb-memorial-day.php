@@ -10,6 +10,7 @@ require_once("lib/converter.php");
 
 
 class MB_SoulMemorialDay {
+	static $instance = null;
 	var $FOR_POST_TYPE = DBOARD_SOUL_POST_TYPE;
 	var $box_id;
 	var $box_label;
@@ -18,7 +19,11 @@ class MB_SoulMemorialDay {
 	var $meta_next_date;
 
 	static function get_instance() {
-		return new self();
+		if ( ! self::$instance ) {
+			self::$instance = new self;
+		}
+
+		return self::$instance;
 	}
 
 	function __construct() {
