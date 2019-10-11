@@ -15,8 +15,8 @@ class MB_SoulMemorialDay {
 	var $box_id;
 	var $box_label;
 	var $field_name;
-	var $meta_key;
-	var $meta_next_date;
+	var $meta_key        = "soul_memorial_day";
+	var $meta_next_date  = "soul_memorial_day_next";
 
 	static function get_instance() {
 		if ( ! self::$instance ) {
@@ -38,8 +38,6 @@ class MB_SoulMemorialDay {
 		$this->box_id       = "metabox-soul-memorial-day";
 		$this->box_label    = __( 'Memorial Day' );
 		$this->field_name   = "soul_memorial_day";
-		$this->meta_key     = "soul_memorial_day";
-		$this->meta_next_date  = "soul_memorial_day_next";
 		add_action( 'add_meta_boxes', array( $this, 'add_meta_boxes' ) );
 		add_action( 'save_post', array( $this, 'save_post' ), 10, 2 );
 	}
