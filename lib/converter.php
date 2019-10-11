@@ -48,9 +48,15 @@ function heb_year_today() {
 	return $hy;
 }
 
+function multibyte_trim($rx, $str)
+{
+	return preg_replace("/(^$rx)|($rx$)/u", "", $str);
+}
+
 function h2g($hebdate, $hy2='') {
 	$heb_ltrs = 'אבגדהוזחטיכלמנסעפצקרשתךףןץ ';
-	$hebdate = preg_replace('/[^'.$heb_ltrs.']/', "", $hebdate);
+	$hebdate = preg_replace('/[^'.$heb_ltrs.']/u', "", $hebdate);
+//	print_r($hebdate); print "<br>";
 	$ex = explode(' ', $hebdate, 4);
 	if (count($ex) == 3) {
 		list($hd, $hm, $hy) = $ex;
@@ -69,7 +75,10 @@ function h2g($hebdate, $hy2='') {
 		if ($hy < 1000)
 			$hy+=5000;
 	}
+	$in_month = 'ב';
+	$hm = multibyte_trim($in_month, $hm);
 	$hm = heb_month_to_num($hm, $hy);
+//	print "d:$hd m:$hm y:$hy <br>";
 	if (!$hm)
 		return false;
 //	print $hd . " " . $hm . " " . $hy . "<br>";
