@@ -34,6 +34,10 @@ class DigitalBoard {
 		self::init_hooks();
 	}
 
+	public static function get_setting( $key, $section ) {
+		return self::$settings->get_option($key, $section);
+	}
+
 	static function init_hooks() {
 		add_action( 'init', array( 'DigitalBoard', 'create_post_types' ) );
 		add_action( 'widgets_init', array( 'DigitalBoard', 'widgets_init' ) );
@@ -99,6 +103,10 @@ class DigitalBoard {
 			array(
 				'id' => 'dboard_basic',
 				'title' => __( 'General Settings' ),
+			),
+			array(
+				'id' => 'dboard_soul',
+				'title' => __( 'Soul Settings' ),
 			),
 		);
 
@@ -174,6 +182,13 @@ class DigitalBoard {
 					'max' => 900,
 					'placeholder' => 300,
 					'label' => __( 'Heartbeat interval in seconds' ),
+				),
+			),
+			'dboard_soul' => array(
+				array(
+					'name' => 'bg_img',
+					'type' => 'file',
+					'label' => __('Background image'),
 				),
 			),
 		);

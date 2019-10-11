@@ -138,6 +138,11 @@ body.admin-bar footer { margin-bottom: 32px; }
 .hide { display: none; }
 .msg.active { display: block; }
 
+.ilui-nishmat {
+	text-align: center;
+	font-size: 5em;
+}
+
 /* news ticker fix */
 .breaking-news-ticker { height: 50px; line-height: 50px; z-index: 30; }
 .bn-effect-scroll .bn-news ul li { line-height: 50px; }

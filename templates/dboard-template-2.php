@@ -69,18 +69,20 @@ function show_holiday_page( $class ) {
 
 function show_soul_pages( $class ) {
 	$ilui_nishmat = 'לעילוי נשמת';
+	$tanzba = 'ת.נ.צ.ב.ה.';
 	$s = MB_SoulMemorialDay::get_instance();
 	$posts = $s->query_next_dates();
 	$meta_key = "soul_memorial_day";
+	$img = DigitalBoard::get_setting('bg_img', 'dboard_soul');
 	global $post;
 	foreach($posts as $post) {
 		setup_postdata( $post );
 		$date = get_post_meta( $post->ID, $meta_key, true );
-		$img = "";
 		echo "<div class=\"$class ilui-nishmat\" data-img=\"$img\">";
-		echo "<h3>$ilui_nishmat</h3>";
-		echo "<div>$post->post_title</div>";
+		echo "<div>$ilui_nishmat</div>";
+		echo "<h3>$post->post_title</h3>";
 		echo "<div>$date</div>";
+		echo "<div>$tanzba</div>";
 		echo "</div>";
 	}
 	wp_reset_postdata();
