@@ -63,6 +63,9 @@ function h2g($hebdate, $hy2='') {
 	} else if (count($ex) == 4) {
 		list($hd, $hm, $hm2, $hy) = $ex;
 		$hm .= " $hm2";
+	} else if (count($ex) == 2) {
+		list($hd, $hm) = $ex;
+		$hy = heb_year_today();
 	} else {
 		return false;
 	}
@@ -70,7 +73,7 @@ function h2g($hebdate, $hy2='') {
 	$hd = heb_str_to_num($hd);
 	if ($hy2) {
 		$hy = $hy2;
-	} else {
+	} else if (count($ex) > 2) {
 		$hy = heb_str_to_num($hy);
 		if ($hy < 1000)
 			$hy+=5000;
