@@ -290,8 +290,9 @@ class DigitalBoard {
 	static function manage_soul_columns($columns) {
 		 return array(
 			 'cb' => '<input type="checkbox" />',
-			 'title' => __('Title'),
-			 'memorial-day' => __('Memroail Day'),
+			 'title' => __('Name'),
+			 'memorial-day' => __('Memorial Day'),
+			 'memorial-day-next' => __('Next Memorial Day'),
 		 );
 	}
 
@@ -299,11 +300,15 @@ class DigitalBoard {
 		if ($column_name == 'memorial-day') {
 			$meta_key     = "soul_memorial_day";
 			$memorial_day = get_post_meta( $post_id, $meta_key, true );
+			print $memorial_day;
 			$greg = h2g($memorial_day);
 			if (!$greg) {
-				$greg = __('Invalid date');
+				print "<br>" . __('Invalid date');
 			}
-			print "$memorial_day ($greg)";
+		} else if ($column_name == "memorial-day-next") {
+			$meta_key = "soul_memorial_day_next";
+			$date = get_post_meta( $post_id, $meta_key, true );
+			print $date;
 		}
 	}
 
