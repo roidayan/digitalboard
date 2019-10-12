@@ -316,7 +316,7 @@ class DigitalBoard {
 		register_post_type( DBOARD_SOUL_POST_TYPE,
 			array(
 				'labels' => array(
-					'name' => __( 'Soul' ),
+					'name' => __( 'Souls' ),
 					'singular_name' => __( 'Soul' )
 				),
 				'public' => true,
@@ -331,7 +331,7 @@ class DigitalBoard {
 		register_post_type( DBOARD_MSG_POST_TYPE,
 			array(
 				'labels' => array(
-					'name' => __( 'Message' ),
+					'name' => __( 'Messages' ),
 					'singular_name' => __( 'Message' )
 				),
 				'public' => true,
@@ -346,7 +346,7 @@ class DigitalBoard {
 		register_post_type( DBOARD_SCREEN_POST_TYPE,
 			array(
 				'labels' => array(
-					'name' => __( 'Screen' ),
+					'name' => __( 'Screens' ),
 					'singular_name' => __( 'Screen' )
 				),
 				'public' => true,
