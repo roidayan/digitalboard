@@ -5,7 +5,7 @@ class Hebcal {
 	var $hebcal_remote_url = 'http://www.hebcal.com/hebcal/';
 	var $shabbat_remote_url = 'http://www.hebcal.com/shabbat/';
 	var $date_converter_remote_url = 'http://www.hebcal.com/converter/';
-	var $lg = 'h';
+	var $lg = '';
 	var $geonameid = '293397'; // Tel Aviv, Israel
 
 	static function get_instance() {
@@ -15,13 +15,13 @@ class Hebcal {
 		return self::$instance;
 	}
 
-	function __construct() {
-		if (function_exists('get_locale')) {
+	function __construct($lg='') {
+		if ($lg) {
+			$this->lg = $lg;
+		} else if (function_exists('get_locale')) {
 			$a = get_locale();
 			if ($a == 'he_IL')
 				$this->lg = 'h';
-			else
-				$this->lg = 's';
 		}
 	}
 
