@@ -152,7 +152,7 @@ class DigitalBoard {
 				),
 				array(
 					'name' => 'weather_demo',
-					'label' => __( 'Weather status' ),
+					'label' => __( 'Status' ),
 					'callback' => array( 'DigitalBoard', 'callback_weather_demo' ),
 				),
 				array(
@@ -162,7 +162,7 @@ class DigitalBoard {
 				),
 				array(
 					'name' => 'pixabay_demo',
-					'label' => __( 'Pixabay status' ),
+					'label' => __( 'Status' ),
 					'callback' => array( 'DigitalBoard', 'callback_pixabay_demo' ),
 				),
 				array(
@@ -188,7 +188,7 @@ class DigitalBoard {
 				array(
 					'name' => 'bg_img',
 					'type' => 'file',
-					'label' => __('Background image'),
+					'label' => __('Featured Image'),
 				),
 			),
 		);
