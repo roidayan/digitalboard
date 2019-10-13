@@ -111,7 +111,9 @@ class MB_SoulMemorialDay {
 	}
 
 	function query_next_dates() {
-		$maxdate = strtotime('+7 day');
+		$today = date( 'Y-m-d', current_time('timestamp') );
+		$maxdate = strtotime('+7 day', $today);
+		$maxdate = date( 'Y-m-d', $maxdate );
 		$args = array(
 			'post_type'  => $this->FOR_POST_TYPE,
 			'meta_query' => array(
@@ -119,13 +121,13 @@ class MB_SoulMemorialDay {
 				array(
 					'key'     => $this->meta_next_date,
 					'type'    => 'DATETIME',
-					'value'   => date('Y-m-d'),
+					'value'   => $today,
 					'compare' => '>=',
 				),
 				array(
 					'key'     => $this->meta_next_date,
 					'type'    => 'DATETIME',
-					'value'   => date('Y-m-d', $maxdate),
+					'value'   => $maxdate,
 					'compare' => '<=',
 				),
 			),
@@ -134,6 +136,7 @@ class MB_SoulMemorialDay {
 	}
 
 	function query_old_dates() {
+		$today = date( 'Y-m-d', current_time('timestamp') );
 		$args = array(
 			'post_type'  => $this->FOR_POST_TYPE,
 			'meta_query' => array(
@@ -141,7 +144,7 @@ class MB_SoulMemorialDay {
 				array(
 					'key'     => $this->meta_next_date,
 					'type'    => 'DATETIME',
-					'value'   => date('Y-m-d'),
+					'value'   => $today,
 					'compare' => '<',
 				),
 				array(

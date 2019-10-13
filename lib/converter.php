@@ -101,7 +101,8 @@ function h2g_next($hebdate) {
 		return false;
 
 	$dt = new DateTime($ctime);
-	$today = new DateTime(date('Y-m-d'));
+	$today = date( 'Y-m-d', current_time('timestamp') );
+	$today = new DateTime($today);
 	if ($dt < $today)
 		$difference = -1;
 	else

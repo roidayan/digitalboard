@@ -65,7 +65,7 @@ class Hebcal {
 		if (!$data)
 			return false;
 		// item date might contain time so need to parse it
-		$today = date('Y-m-d');
+		$today = date( 'Y-m-d', current_time('timestamp') );
 		$items = array();
 
 		foreach( $data['items'] as $item ) {
