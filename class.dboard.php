@@ -126,7 +126,7 @@ class DigitalBoard {
 		if ( empty( $w ) ) {
 			print self::$image_provider->get_last_resp_code();
 		} else {
-			print 'OK';
+			_e('Passed');
 		}
 	}
 
