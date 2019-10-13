@@ -70,17 +70,22 @@ class MB_SoulMemorialDay {
 		echo "<tr>";
 		echo "<th><label for=\"$id\">$text</label></th>";
 		echo "<td><input id=\"$id\" name=\"{$this->field_name}\" class=\"regular-text\" value=\"$value\"></input></td>";
-		echo "</table>";
+		echo "</tr>";
+		echo "<tr>";
+		$next = false;
 		if ($value) {
 			$greg = h2g($value);
-			if ($greg) {
-				print $greg;
+			if ($greg)
 				$next = h2g_next($value);
-				print "<br>Next: $next";
-			} else {
-				print __('Invalid date');
-			}
 		}
+		if ($next) {
+			echo "<th>".__("Next Memorial Day")."</th>";
+			echo "<td>$next</td>";
+		} else {
+			echo "<div class=\"error\">".__("Invalid memorial day")."</div>";
+		}
+		echo "</tr>";
+		echo "</table>";
 	}
 
 	function save_post_next_date( $post_id, $hebdate ) {
