@@ -36,10 +36,10 @@ class Hebcal {
 			$data = file_get_contents($url);
 		}
 
-		if ($data)
-			$data = json_decode( $data, true );
+		if (!$data)
+			return false;
 
-		return false;
+		return json_decode( $data, true );
 	}
 
 	function calendar($month='x') {
