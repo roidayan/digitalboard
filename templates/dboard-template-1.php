@@ -21,12 +21,14 @@ function tpl_scripts() {
 add_action( 'wp_enqueue_scripts', array( 'DigitalBoard', 'enqueue_scripts' ), 20 );
 add_action( 'wp_enqueue_scripts', 'tpl_scripts', 20 );
 
+nocache_headers();
 ?><!DOCTYPE html>
 <html <?php language_attributes(); ?> class="no-js no-svg">
 <head>
 <meta charset="<?php bloginfo( 'charset' ); ?>">
 <meta name="google" content="notranslate">
 <meta name="viewport" content="width=device-width, initial-scale=1">
+<meta http-equiv="cache-control" content="no-cache" />
 <?php
 wp_head();
 

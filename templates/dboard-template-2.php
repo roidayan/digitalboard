@@ -77,12 +77,14 @@ function show_soul_pages( $class ) {
 	wp_reset_postdata();
 }
 
+nocache_headers();
 ?><!DOCTYPE html>
 <html <?php language_attributes(); ?> class="no-js no-svg">
 <head>
 <meta charset="<?php bloginfo( 'charset' ); ?>">
 <meta name="google" content="notranslate">
 <meta name="viewport" content="width=device-width, initial-scale=1">
+<meta http-equiv="cache-control" content="no-cache" />
 <?php
 wp_head();
 
