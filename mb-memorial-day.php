@@ -30,7 +30,7 @@ class MB_SoulMemorialDay {
 		add_action( 'admin_init', array( $this, 'admin_init' ) );
 		add_action( 'soul_memorial_daily_event', array( $this, 'soul_memorial_daily' ) );
 		if (!wp_next_scheduled('soul_memorial_daily_event')) {
-			wp_schedule_event(time(), 'daily', 'soul_memorial_daily_event');
+			wp_schedule_event(time(), 'hourly', 'soul_memorial_daily_event');
 		}
 	}
 
