@@ -183,6 +183,12 @@ class DigitalBoard {
 					'placeholder' => 300,
 					'label' => __( 'Heartbeat interval in seconds' ),
 				),
+				array(
+					'name' => 'cb_create_holiday_msgs',
+					'type' => 'checkbox',
+					'label' => __('Create holiday msgs'),
+					'sanitize_callback' => array( 'DigitalBoard', 'sanitize_create_holiday_msgs' ),
+				),
 			),
 			'dboard_soul' => array(
 				array(
@@ -194,6 +200,57 @@ class DigitalBoard {
 		);
 
 		return $fields;
+	}
+
+	function get_post_by_slug($slug) {
+		$args = array(
+			'name'           => $slug,
+			'post_type'      => DBOARD_MSG_POST_TYPE,
+			'post_status'    => 'publish',
+			'posts_per_page' => 1
+		);
+		$my_posts = get_posts( $args );
+		return array_shift($my_posts);
+	}
+
+	static function register_holiday_msgs() {
+		$tags = [
+			'rosh-hashana',
+			'yom-kippur',
+			'sukkot',
+			'shmini-atzeret',
+			'simchat-torah',
+			'chanukah',
+			'purim',
+			'pesach',
+			'shavuot',
+			'tisha-bav',
+		];
+
+		$count = 0;
+		foreach($tags as $tag) {
+			$post = self::get_post_by_slug($tag);
+			if ($post)
+				continue;
+
+			$my_post = array(
+				'post_type'     => DBOARD_MSG_POST_TYPE,
+				'post_title'    => $tag,
+			);
+			wp_insert_post( $my_post );
+			$count++;
+		}
+		return $count;
+	}
+
+	static function sanitize_create_holiday_msgs($value) {
+		if ($value == 'on') {
+			self::register_holiday_msgs();
+			add_settings_error( 'cb_create_holiday_msgs', 'cbhm',
+					    __("Added holiday msgs"),
+					    'updated' );
+		}
+		return 'off';
 	}
 
 	static function heartbeat_settings( $settings ) {

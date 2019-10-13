@@ -25,17 +25,6 @@ function tpl_scripts() {
 add_action( 'wp_enqueue_scripts', array( 'DigitalBoard', 'enqueue_scripts' ), 20 );
 add_action( 'wp_enqueue_scripts', 'tpl_scripts', 20 );
 
-function get_post_by_slug($slug) {
-	$args = array(
-		'name'           => $slug,
-		'post_type'      => DBOARD_MSG_POST_TYPE,
-		'post_status'    => 'publish',
-		'posts_per_page' => 1
-	);
-	$my_posts = get_posts( $args );
-	return array_shift($my_posts);
-}
-
 function get_post_thumbnail($post_id) {
 	return wp_get_attachment_url( get_post_thumbnail_id( $post_id ), 'thumbnail' );
 }
@@ -50,7 +39,7 @@ function show_holiday_page( $class ) {
 	$title = $item['title'];
 	$slug = basename($item['link']);
 	global $post;
-	$post = get_post_by_slug($slug);
+	$post = DigitalBoard::get_post_by_slug($slug);
 	if ($post) {
 		setup_postdata( $post );
 		$img = get_post_thumbnail($post->ID);
