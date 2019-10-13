@@ -72,12 +72,14 @@ class HebcalShortcodes {
 	}
 
 	static function get_item_by_category($items, $category) {
-		foreach( $items as $item ) {
-			if ($item['category'] == $category) {
-				return $item;
+		if ($items) {
+			foreach( $items as $item ) {
+				if ($item['category'] == $category) {
+					return $item;
+				}
 			}
 		}
-		return NULL;
+		return false;
 	}
 
 	static function parashat() {

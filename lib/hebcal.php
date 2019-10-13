@@ -39,7 +39,7 @@ class Hebcal {
 		if ($data)
 			$data = json_decode( $data, true );
 
-		return $data;
+		return false;
 	}
 
 	function calendar($month='x') {
@@ -62,6 +62,8 @@ class Hebcal {
 
 	function calendar_today( $category='', $subcat='' ) {
 		$data = $this->calendar( date('m') );
+		if (!$data)
+			return false;
 		// item date might contain time so need to parse it
 		$today = date('Y-m-d');
 		$items = array();
@@ -93,6 +95,8 @@ class Hebcal {
 			'tisha-bav',
 		];
 		$allitems = $this->calendar_today('holiday');
+		if (!$allitems)
+			return false;
 		$items = array();
 		foreach( $allitems as $item ) {
 			$slug = basename($item['link']);
