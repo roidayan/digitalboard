@@ -202,7 +202,7 @@ class DigitalBoard {
 		return $fields;
 	}
 
-	function get_post_by_slug($slug) {
+	static function get_post_by_slug($slug) {
 		$args = array(
 			'name'           => $slug,
 			'post_type'      => DBOARD_MSG_POST_TYPE,
