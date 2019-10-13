@@ -111,8 +111,9 @@ class MB_SoulMemorialDay {
 	}
 
 	function query_next_dates() {
-		$today = date( 'Y-m-d', current_time('timestamp') );
-		$maxdate = strtotime('+7 day', $today);
+		$current = current_time('timestamp');
+		$today = date( 'Y-m-d', $current );
+		$maxdate = strtotime( '+7 day', $current );
 		$maxdate = date( 'Y-m-d', $maxdate );
 		$args = array(
 			'post_type'  => $this->FOR_POST_TYPE,
