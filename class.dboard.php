@@ -130,6 +130,15 @@ class DigitalBoard {
 		}
 	}
 
+	static function callback_rss_feed_demo() {
+		$w = self::get_rss_feed();
+		if ( !$w ) {
+			_e('Failed');
+		} else {
+			_e('Passed');
+		}
+	}
+
 	static function get_settings_fields() {
 		$fields = array(
 			'dboard_basic' => array(
@@ -174,6 +183,11 @@ class DigitalBoard {
 					'name' => 'rss_feed',
 					'type' => 'text',
 					'label' => __( 'RSS feed' ),
+				),
+				array(
+					'name' => 'rss_feed_demo',
+					'label' => __( 'Status' ),
+					'callback' => array( 'DigitalBoard', 'callback_rss_feed_demo' ),
 				),
 				array(
 					'name' => 'hb_interval',
@@ -509,7 +523,7 @@ class DigitalBoard {
 		$rss = self::fetch_feed( $url );
 
 		if ( is_wp_error( $rss ) ) {
-			return;
+			return false;
 		}
 
 		$maxitems = $rss->get_item_quantity( 5 );
