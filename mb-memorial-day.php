@@ -48,7 +48,7 @@ class MB_SoulMemorialDay {
 			$v = get_post_meta( $post->ID, $this->meta_key, true );
 			if (!$v)
 				continue;
-			$this->save_post_next_date( $post_id, $v );
+			$this->save_post_next_date( $post->ID, $v );
 		}
 	}
 
