@@ -17,6 +17,7 @@ class MB_SoulMemorialDay {
 	var $field_name;
 	var $meta_key        = "soul_memorial_day";
 	var $meta_next_date  = "soul_memorial_day_next";
+	var $meta_year       = "soul_memorial_day_year";
 
 	static function get_instance() {
 		if ( ! self::$instance ) {
@@ -97,15 +98,26 @@ class MB_SoulMemorialDay {
 		}
 	}
 
+	function save_post_memorial_year( $post_id, $hebdate ) {
+		$year = h2g_get_year($hebdate);
+		if ($year) {
+			update_post_meta( $post_id, $this->meta_year, $year );
+		} else {
+			delete_post_meta( $post_id, $this->meta_year );
+		}
+	}
+
 	function save_post( $post_id, $post ) {
 		if ( $post->post_type == $this->FOR_POST_TYPE ) {
 			if ( isset( $_POST[$this->field_name] ) ) {
 				$v = esc_attr( $_POST[$this->field_name] );
 				update_post_meta( $post_id, $this->meta_key, $v );
 				$this->save_post_next_date( $post_id, $v );
+				$this->save_post_memorial_year( $post_id, $v );
 			} else {
 				delete_post_meta( $post_id, $this->meta_key );
 				delete_post_meta( $post_id, $this->meta_next_date );
+				delete_post_meta( $post_id, $this->meta_year );
 			}
 		}
 	}
@@ -113,23 +125,33 @@ class MB_SoulMemorialDay {
 	function query_next_dates() {
 		$current = current_time('timestamp');
 		$today = date( 'Y-m-d', $current );
+		$this_year = date( 'Y', $current );
 		$maxdate = strtotime( '+7 day', $current );
 		$maxdate = date( 'Y-m-d', $maxdate );
 		$args = array(
 			'post_type'  => $this->FOR_POST_TYPE,
 			'meta_query' => array(
-				'relation' => 'AND',
+				'relation' => 'OR',
 				array(
-					'key'     => $this->meta_next_date,
-					'type'    => 'DATETIME',
-					'value'   => $today,
-					'compare' => '>=',
+					'key'     => $this->meta_year,
+					'type'    => 'YEAR',
+					'value'   => $this_year,
+					'compare' => '=',
 				),
 				array(
-					'key'     => $this->meta_next_date,
-					'type'    => 'DATETIME',
-					'value'   => $maxdate,
-					'compare' => '<=',
+					'relation' => 'AND',
+					array(
+						'key'     => $this->meta_next_date,
+						'type'    => 'DATETIME',
+						'value'   => $today,
+						'compare' => '>=',
+					),
+					array(
+						'key'     => $this->meta_next_date,
+						'type'    => 'DATETIME',
+						'value'   => $maxdate,
+						'compare' => '<=',
+					),
 				),
 			),
 		);

@@ -116,3 +116,11 @@ function h2g_next($hebdate) {
 
 	return $ctime;
 }
+
+function h2g_get_year($hebdate) {
+	$ex = explode(' ', $hebdate, 4);
+	if ( count($ex) < 3 )
+		return false;
+	$date = h2g($hebdate);
+	return date( 'Y', strtotime($date) );
+}
