@@ -198,6 +198,14 @@ class DigitalBoard {
 					'label' => __( 'Heartbeat interval in seconds' ),
 				),
 				array(
+					'name' => 'cycle_msgs_interval',
+					'type' => 'number',
+					'min' => 1,
+					'max' => 1000,
+					'placeholder' => 5,
+					'label' => __( 'Cycle msgs interval in seconds' ),
+				),
+				array(
 					'name' => 'cb_create_holiday_msgs',
 					'type' => 'checkbox',
 					'label' => __('Create holiday msgs'),
@@ -312,6 +320,11 @@ class DigitalBoard {
 		$page_version = self::get_page_version();
 		$news_ticker = self::get_news_ticker();
 
+		$interval = self::$settings->get_option( 'cycle_msgs_interval', 'dboard_basic' );
+		if ( empty( $interval ) || $interval < 1 || $interval >  1000 ) {
+			$interval = 5;
+		}
+
 		$response['dboard'] = array(
 			'weather_name' => $weather->get_weather_name(),
 			'weather_desc' => $weather->get_weather_desc(),
@@ -323,6 +336,7 @@ class DigitalBoard {
 			'page_version' => $page_version,
 			'news_ticker' => $news_ticker,
 			'last_rss_item' => self::$last_rss_item,
+			'cycle_msgs_interval' => $interval,
 		);
 
 		wp_reset_postdata();

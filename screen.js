@@ -128,9 +128,12 @@ function init_news_ticker() {
 }
 
 function cycle_single_msgs() {
-	const display_time = 5000;
+	var display_time = 5000;
 	const delay = 1000; // delay for the animation.
 	const selector = ".msg-container";
+
+	if (dboard_settings.cycle_msgs_interval)
+		display_time = dboard_settings.cycle_msgs_interval * 1000;
 
 	container = jQuery(selector);
 	active = jQuery(".msg.active");
