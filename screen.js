@@ -4,12 +4,17 @@
  * @package DigitalBoard
  *
  */
+var dboard_page_version = 0;
+var dboard_last_rss_item = '';
+var dboard_refresh_at_midnight = false;
+var dboard_settings = {};
 
 jQuery(document).ready(function( $ ) {
 	dboard_update_time();
 	setInterval(dboard_update_time, 1000);
 	dboard_set_next_midnight_event();
 	init_news_ticker();
+	window.heartbeat2.connectNow();
 
 }).on( 'heartbeat2-send', function ( event, data ) {
 	data['dboard'] = {
@@ -29,11 +34,6 @@ jQuery(document).ready(function( $ ) {
 	window.heartbeat2.connectNow();
 });
 
-var dboard_page_version = 0;
-var dboard_last_rss_item = '';
-var dboard_refresh_at_midnight = false;
-
-
 function refresh_at_midnight() {
 	dboard_refresh_at_midnight = true;
 }
@@ -50,6 +50,8 @@ function dboard_refresh_data( data ) {
 		return;
 	}
 
+	dboard_settings = data.dboard;
+	console.log(dboard_settings);
 	dboard_page_version = data.dboard.page_version;
 	dboard_last_rss_item = data.dboard.last_rss_item;
 
