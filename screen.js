@@ -151,7 +151,8 @@ function cycle_single_msgs() {
 		container.removeClass( 'fadeOut' ).addClass( 'animated fadeIn' );
 		dboard_set_background_image( selector, next.data().img );
 
-		setTimeout(cycle_single_msgs, display_time + delay);
+		if (jQuery(".msg").length > 1)
+			setTimeout(cycle_single_msgs, display_time + delay);
 	}, delay);
 }
 
