@@ -37,7 +37,7 @@ class MB_SoulMemorialDay {
 
 	function admin_init() {
 		$this->box_id       = "metabox-soul-memorial-day";
-		$this->box_label    = __( 'Memorial Day' );
+		$this->box_label    = __( 'Memorial Day', DBOARD_TD );
 		$this->field_name   = "soul_memorial_day";
 		add_action( 'add_meta_boxes', array( $this, 'add_meta_boxes' ) );
 		add_action( 'save_post', array( $this, 'save_post' ), 10, 2 );
@@ -76,15 +76,14 @@ class MB_SoulMemorialDay {
 		$next = false;
 		if ($value) {
 			$greg = h2g($value);
-			if ($greg)
+			if ($greg) {
 				$next = h2g_next($value);
-		}
-		if ($next) {
-			echo "<th>".__("Next Memorial Day")."</th>";
-			echo "<td>$next</td>";
-		} else {
-			if ($post->post_status != 'auto-draft') {
-				echo "<div class=\"error\">".__("Invalid memorial day")."</div>";
+			}
+			if ( $next ) {
+				echo "<th>" . __( 'Next Memorial Day', DBOARD_TD ) . "</th>";
+				echo "<td>$next</td>";
+			} else {
+				echo "<div class=\"error\">" . __( 'Invalid memorial day', DBOARD_TD ) . "</div>";
 			}
 		}
 		echo "</tr>";

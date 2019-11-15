@@ -24,7 +24,7 @@ msgid "Messages"
 msgstr "הודעות"
 
 #: 
-msgid "Soulds"
+msgid "Souls"
 msgstr "נשמות"
 
 #: 
@@ -65,17 +65,17 @@ msgstr "נשמה חדשה"
 
 #: 
 msgid "Create holiday messages"
-msgstr ""
+msgstr "צור הודעות עבור החגים"
 
 #: 
 msgid "Cycle messages interval"
-msgstr ""
+msgstr "זמן מחזורי בין הודעות"
 
 #: 
 msgid "Heartbeat interval"
-msgstr ""
+msgstr "זמן מחזורי לעדכון"
 
 #: 
 msgid "In seconds"
-msgstr ""
+msgstr "בשניות"
 

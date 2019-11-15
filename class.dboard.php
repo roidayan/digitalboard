@@ -74,7 +74,7 @@ class DigitalBoard {
 
 		$field_id    = self::$meta_key_use_image_provider;
 		$field_value = esc_attr( get_post_meta( $post_id, $field_id, true ) );
-		$field_text  = esc_html__( 'Use image provider' );
+		$field_text  = esc_html__( 'Use image provider', DBOARD_TD );
 		$field_state = checked( $field_value, 1, false);
 
 		$field_label = sprintf(
@@ -92,8 +92,10 @@ class DigitalBoard {
 	}
 
 	static function admin_menu() {
-		add_options_page( 'Digital Board', 'Digital Board',
-				  'manage_options', 'digital_board_settings',
+		add_options_page(
+			__( 'Digital Board', DBOARD_TD ),
+			__( 'Digital Board', DBOARD_TD ),
+			'manage_options', 'digital_board_settings',
 			array( 'DigitalBoard', 'plugin_page' ) );
 	}
 
@@ -112,7 +114,7 @@ class DigitalBoard {
 			),
 			array(
 				'id' => 'dboard_soul',
-				'title' => __( 'Soul Settings' ),
+				'title' => __( 'Soul Settings', DBOARD_TD ),
 			),
 		);
 
@@ -201,8 +203,8 @@ class DigitalBoard {
 					'min' => 30,
 					'max' => 900,
 					'placeholder' => 300,
-					'label' => __( 'Heartbeat interval' ),
-					'desc' => __( 'In seconds' ),
+					'label' => __( 'Heartbeat interval', DBOARD_TD ),
+					'desc' => __( 'In seconds', DBOARD_TD ),
 				),
 				array(
 					'name' => 'cycle_msgs_interval',
@@ -210,13 +212,13 @@ class DigitalBoard {
 					'min' => 1,
 					'max' => 1000,
 					'placeholder' => 5,
-					'label' => __( 'Cycle messages interval' ),
-					'desc' => __( 'In seconds' ),
+					'label' => __( 'Cycle messages interval', DBOARD_TD ),
+					'desc' => __( 'In seconds', DBOARD_TD ),
 				),
 				array(
 					'name' => 'cb_create_holiday_msgs',
 					'type' => 'checkbox',
-					'label' => __('Create holiday messages'),
+					'label' => __('Create holiday messages', DBOARD_TD ),
 					'sanitize_callback' => array( 'DigitalBoard', 'sanitize_create_holiday_msgs' ),
 				),
 			),
@@ -384,8 +386,8 @@ class DigitalBoard {
 		 return array(
 			 'cb' => '<input type="checkbox" />',
 			 'title' => __('Name'),
-			 'memorial-day' => __('Memorial Day'),
-			 'memorial-day-next' => __('Next Memorial Day'),
+			 'memorial-day' => __( 'Memorial Day', DBOARD_TD ),
+			 'memorial-day-next' => __( 'Next Memorial Day', DBOARD_TD ),
 		 );
 	}
 
@@ -393,10 +395,12 @@ class DigitalBoard {
 		if ($column_name == 'memorial-day') {
 			$meta_key     = "soul_memorial_day";
 			$memorial_day = get_post_meta( $post_id, $meta_key, true );
-			print $memorial_day;
-			$greg = h2g($memorial_day);
-			if (!$greg) {
-				print "<br>" . __('Invalid date');
+			if ( ! empty( $memorial_day ) ) {
+				print $memorial_day;
+				$greg = h2g($memorial_day);
+				if (!$greg) {
+					print "<br>" . __( 'Invalid memorial day', DBOARD_TD );
+				}
 			}
 		} else if ($column_name == "memorial-day-next") {
 			$meta_key = "soul_memorial_day_next";
@@ -409,11 +413,11 @@ class DigitalBoard {
 		register_post_type( DBOARD_SOUL_POST_TYPE,
 			array(
 				'labels' => array(
-					'name' => __( 'Souls' ),
-					'singular_name' => __( 'Soul' ),
-					'new_item'      => __( 'New Soul' ),
-					'add_new'       => __( 'New Soul' ),
-					'add_new_item'  => __( 'New Soul' ),
+					'name' => __( 'Souls', DBOARD_TD ),
+					'singular_name' => __( 'Soul', DBOARD_TD ),
+					'new_item'      => __( 'New Soul', DBOARD_TD ),
+					'add_new'       => __( 'New Soul', DBOARD_TD ),
+					'add_new_item'  => __( 'New Soul', DBOARD_TD ),
 				),
 				'public' => true,
 				'has_archive' => true,
@@ -427,11 +431,11 @@ class DigitalBoard {
 		register_post_type( DBOARD_MSG_POST_TYPE,
 			array(
 				'labels' => array(
-					'name' => __( 'Messages' ),
-					'singular_name' => __( 'Message' ),
-					'new_item'      => __( 'New Message' ),
-					'add_new'       => __( 'New Message' ),
-					'add_new_item'  => __( 'New Message' ),
+					'name' => __( 'Messages', DBOARD_TD ),
+					'singular_name' => __( 'Message', DBOARD_TD ),
+					'new_item'      => __( 'New Message', DBOARD_TD ),
+					'add_new'       => __( 'New Message', DBOARD_TD ),
+					'add_new_item'  => __( 'New Message', DBOARD_TD ),
 				),
 				'public' => true,
 				'has_archive' => true,
@@ -445,11 +449,11 @@ class DigitalBoard {
 		register_post_type( DBOARD_SCREEN_POST_TYPE,
 			array(
 				'labels' => array(
-					'name' => __( 'Screens' ),
-					'singular_name' => __( 'Screen' ),
-					'new_item'      => __( 'New Screen' ),
-					'add_new'       => __( 'New Screen' ),
-					'add_new_item'  => __( 'New Screen' ),
+					'name' => __( 'Screens', DBOARD_TD ),
+					'singular_name' => __( 'Screen', DBOARD_TD ),
+					'new_item'      => __( 'New Screen', DBOARD_TD ),
+					'add_new'       => __( 'New Screen', DBOARD_TD ),
+					'add_new_item'  => __( 'New Screen', DBOARD_TD ),
 				),
 				'public' => true,
 				'has_archive' => true,
