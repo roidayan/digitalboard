@@ -15,6 +15,11 @@ class DigitalBoard {
 	private static $last_rss_item;
 	private static $meta_key_use_image_provider = '_dboard_use_image_provider';
 
+
+	public static function load_text_domain() {
+		load_plugin_textdomain( DBOARD_TD, false, DBOARD_PLUGIN_RELPATH . '/translation' );
+	}
+
 	public static function init() {
 		if ( ! self::$initiated ) {
 			self::$initiated = true;
@@ -40,6 +45,7 @@ class DigitalBoard {
 
 	static function init_hooks() {
 		add_action( 'init', array( 'DigitalBoard', 'create_post_types' ) );
+		add_action( 'plugins_loaded', array( 'DigitalBoard', 'load_text_domain' ) );
 		add_action( 'widgets_init', array( 'DigitalBoard', 'widgets_init' ) );
 		add_filter( 'heartbeat2_settings', array( 'DigitalBoard', 'heartbeat_settings' ) );
 		add_filter( 'heartbeat2_received', array( 'DigitalBoard', 'heartbeat_received' ), 10, 2 );

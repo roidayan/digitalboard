@@ -1,0 +1,81 @@
+msgid ""
+msgstr ""
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"X-Generator: POEditor.com\n"
+"Project-Id-Version: digitalboard\n"
+"Language: he\n"
+
+#: 
+msgid "Digital Board"
+msgstr "מסך דיגיטלי"
+
+#: 
+msgid "Soul Settings"
+msgstr "הגדרות לנשמות"
+
+#: 
+msgid "Screens"
+msgstr "מסכים"
+
+#: 
+msgid "Messages"
+msgstr "הודעות"
+
+#: 
+msgid "Soulds"
+msgstr "נשמות"
+
+#: 
+msgid "Next Memorial Day"
+msgstr "יום זיכרון הבא"
+
+#: 
+msgid "Memorial Day"
+msgstr "יום זיכרון"
+
+#: 
+msgid "Use image provider"
+msgstr "להשתמש בספק תמונות"
+
+#: 
+msgid "Select Messages"
+msgstr "בחר הודעות"
+
+#: 
+msgid "No Messages"
+msgstr "אין הודעות"
+
+#: 
+msgid "New Screen"
+msgstr "מסך חדש"
+
+#: 
+msgid "New Message"
+msgstr "הודעה חדשה"
+
+#: 
+msgid "Invalid memorial day"
+msgstr "תאריך זיכרון לא חוקי"
+
+#: 
+msgid "New Soul"
+msgstr "נשמה חדשה"
+
+#: 
+msgid "Create holiday messages"
+msgstr ""
+
+#: 
+msgid "Cycle messages interval"
+msgstr ""
+
+#: 
+msgid "Heartbeat interval"
+msgstr ""
+
+#: 
+msgid "In seconds"
+msgstr ""
+

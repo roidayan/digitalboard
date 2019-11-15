@@ -10,7 +10,7 @@ Version: 0.1.0
 Author: Roi Dayan
 Author URI: https://roidayan.com
 License: GPLv2 or later
-Text Domain: dboard
+Text Domain: digital-board
 */
 
 /*
@@ -30,15 +30,16 @@ Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 */
 
 if ( !function_exists( 'add_action' ) ) {
-	echo 'Hi there!  I\'m just a plugin, not much I can do when called directly.';
+	echo "Hi there! I'm just a plugin, not much I can do when called directly.";
 	exit;
 }
 
+define( 'DBOARD_TD', 'digital-board' );
+define( 'DBOARD_PLUGIN_RELPATH', dirname( plugin_basename( __FILE__ ) ) );
 define( 'DBOARD_MSG_POST_TYPE', 'dboard_msg' );
 define( 'DBOARD_SCREEN_POST_TYPE', 'dboard_screen' );
-define( 'DBOARD_SIDEBAR', 'sidebar-dboard' );
-
 define( 'DBOARD_SOUL_POST_TYPE', 'dboard_soul' );
+define( 'DBOARD_SIDEBAR', 'sidebar-dboard' );
 
 require_once( 'class.dboard.php' );
 require_once( 'class.heartbeat2.php' );
