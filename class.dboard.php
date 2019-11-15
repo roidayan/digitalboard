@@ -402,7 +402,10 @@ class DigitalBoard {
 			array(
 				'labels' => array(
 					'name' => __( 'Souls' ),
-					'singular_name' => __( 'Soul' )
+					'singular_name' => __( 'Soul' ),
+					'new_item'      => __( 'New Soul' ),
+					'add_new'       => __( 'New Soul' ),
+					'add_new_item'  => __( 'New Soul' ),
 				),
 				'public' => true,
 				'has_archive' => true,
@@ -417,7 +420,10 @@ class DigitalBoard {
 			array(
 				'labels' => array(
 					'name' => __( 'Messages' ),
-					'singular_name' => __( 'Message' )
+					'singular_name' => __( 'Message' ),
+					'new_item'      => __( 'New Message' ),
+					'add_new'       => __( 'New Message' ),
+					'add_new_item'  => __( 'New Message' ),
 				),
 				'public' => true,
 				'has_archive' => true,
@@ -432,7 +438,10 @@ class DigitalBoard {
 			array(
 				'labels' => array(
 					'name' => __( 'Screens' ),
-					'singular_name' => __( 'Screen' )
+					'singular_name' => __( 'Screen' ),
+					'new_item'      => __( 'New Screen' ),
+					'add_new'       => __( 'New Screen' ),
+					'add_new_item'  => __( 'New Screen' ),
 				),
 				'public' => true,
 				'has_archive' => true,
