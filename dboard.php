@@ -34,23 +34,22 @@ if ( !function_exists( 'add_action' ) ) {
 	exit;
 }
 
-define( 'DBOARD_PLUGIN_DIR', plugin_dir_path( __FILE__ ) );
 define( 'DBOARD_MSG_POST_TYPE', 'dboard_msg' );
 define( 'DBOARD_SCREEN_POST_TYPE', 'dboard_screen' );
 define( 'DBOARD_SIDEBAR', 'sidebar-dboard' );
 
 define( 'DBOARD_SOUL_POST_TYPE', 'dboard_soul' );
 
-require_once( DBOARD_PLUGIN_DIR . 'class.dboard.php' );
-require_once( DBOARD_PLUGIN_DIR . 'class.heartbeat2.php' );
-require_once( DBOARD_PLUGIN_DIR . 'class.settings.php' );
-require_once( DBOARD_PLUGIN_DIR . 'class.pixabay.php' );
-require_once( DBOARD_PLUGIN_DIR . 'class.openweathermap.php' );
-require_once( DBOARD_PLUGIN_DIR . 'checklist-pages.php' );
-require_once( DBOARD_PLUGIN_DIR . 'pagetemplater.php' );
-require_once( DBOARD_PLUGIN_DIR . 'mb-msgs.php' );
-require_once( DBOARD_PLUGIN_DIR . 'mb-memorial-day.php' );
-require_once( DBOARD_PLUGIN_DIR . 'shortcodes.php' );
+require_once( 'class.dboard.php' );
+require_once( 'class.heartbeat2.php' );
+require_once( 'class.settings.php' );
+require_once( 'class.pixabay.php' );
+require_once( 'class.openweathermap.php' );
+require_once( 'checklist-pages.php' );
+require_once( 'pagetemplater.php' );
+require_once( 'mb-msgs.php' );
+require_once( 'mb-memorial-day.php' );
+require_once( 'shortcodes.php' );
 
 Heartbeat2::init();
 DigitalBoard::init();
