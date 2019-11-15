@@ -478,7 +478,6 @@ class DigitalBoard {
 			setup_postdata( $post );
 			$img = self::get_background_image();
 			echo "<div class=\"$class\" data-img=\"$img\">";
-			the_title( '<h3>', '</h3>' );
 			the_content();
 			echo "</div>";
 		}
