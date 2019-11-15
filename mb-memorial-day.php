@@ -64,9 +64,6 @@ class MB_SoulMemorialDay {
 	}
 
 	function content( $post ) {
-		if ($post->post_status == 'auto-draft') {
-			return;
-		}
 		$value = get_post_meta( $post->ID, $this->meta_key, true );
 		$id = "memorial-day";
 		$text = __( 'Date' );
@@ -86,7 +83,9 @@ class MB_SoulMemorialDay {
 			echo "<th>".__("Next Memorial Day")."</th>";
 			echo "<td>$next</td>";
 		} else {
-			echo "<div class=\"error\">".__("Invalid memorial day")."</div>";
+			if ($post->post_status != 'auto-draft') {
+				echo "<div class=\"error\">".__("Invalid memorial day")."</div>";
+			}
 		}
 		echo "</tr>";
 		echo "</table>";
