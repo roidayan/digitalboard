@@ -64,6 +64,9 @@ class MB_SoulMemorialDay {
 	}
 
 	function content( $post ) {
+		if ($post->post_status == 'auto-draft') {
+			return;
+		}
 		$value = get_post_meta( $post->ID, $this->meta_key, true );
 		$id = "memorial-day";
 		$text = __( 'Date' );
