@@ -9,7 +9,6 @@
 class WPSE_85107 {
   var $FOR_POST_TYPE = DBOARD_SCREEN_POST_TYPE;
   var $SELECT_POST_TYPE = DBOARD_MSG_POST_TYPE;
-  var $SELECT_POST_LABEL = 'Message';
   var $box_id;
   var $box_label;
   var $field_id;
@@ -30,8 +29,8 @@ class WPSE_85107 {
     $this->box_id       = "select-{$this->SELECT_POST_TYPE}-metabox";
     $this->field_id     = "selected-{$this->SELECT_POST_TYPE}";
     $this->field_name   = "selected_{$this->SELECT_POST_TYPE}";
-    $this->box_label    = __( "Select {$this->SELECT_POST_LABEL}", 'wpse-85107' );
-    $this->field_label  = __( "Choose {$this->SELECT_POST_LABEL}", 'wpse-85107' );
+    $this->box_label    = __( "Select Messages" );
+    $this->field_label  = __( "No Messages" );
   }
   function add_meta_boxes() {
     add_meta_box(

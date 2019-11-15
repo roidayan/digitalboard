@@ -17,7 +17,9 @@ function wp1_checklist_pages($args = '') {
 		$r['id'] = $r['name'];
 	}
 
-	if ( ! empty($pages) ) {
+	if ( empty($pages) ) {
+		$output = $r['show_option_none'];
+	} else {
 		$output = walk_page_checklist_tree($pages, $r['depth'], $r);
 	}
 
