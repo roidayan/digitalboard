@@ -157,8 +157,10 @@ function cycle_single_msgs() {
 }
 
 function set_first_msg_image_background() {
-	var first = jQuery(".msg").first();
-	var img = first.data().img;
-	if (img)
-		dboard_set_background_image( ".msg-container", img);
+	var first = jQuery(".msg").first().data();
+	if (!first)
+		return;
+
+	if (first.img)
+		dboard_set_background_image( ".msg-container", first.img);
 }
