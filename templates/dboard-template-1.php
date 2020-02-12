@@ -48,6 +48,7 @@ $bg_img = DigitalBoard::get_background_image();
 	var pagenow = <?php the_ID(); ?>;
 	jQuery(document).ready(function( $ ) {
 		set_first_msg_image_background();
+		refresh_at_midnight();
 	});
 </script>
 </head>
