@@ -4,7 +4,7 @@
  */
 /*
 Plugin Name: Digital Board
-Plugin URI: https://roidayan.com
+Plugin URI: https://github.com/roidayan/digitalboard
 Description: Digital board for lobbies for displaying messages and ads to tenants and guests.
 Version: 1.0.0
 Author: Roi Dayan
