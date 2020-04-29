@@ -111,7 +111,7 @@ class MB_SoulMemorialDay {
 	function save_post( $post_id, $post ) {
 		if ( $post->post_type == $this->FOR_POST_TYPE ) {
 			if ( isset( $_POST[$this->field_name] ) ) {
-				$v = esc_attr( $_POST[$this->field_name] );
+				$v = sanitize_text_field( $_POST[$this->field_name] );
 				update_post_meta( $post_id, $this->meta_key, $v );
 				$this->save_post_next_date( $post_id, $v );
 				$this->save_post_memorial_year( $post_id, $v );
