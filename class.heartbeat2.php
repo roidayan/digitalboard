@@ -33,6 +33,11 @@ class Heartbeat2 {
 		$data = array();
 
 		if ( is_array( $_POST['data'] ) ) {
+			/* the heartbeat doesn't know what is the data and is the transffering
+			 * raw data between js and php. it's up to the the user to validate it.
+			 * i.e. the php part validates the data recevied on heartbeat tick and
+			 * the js part validates the data recevied in response.
+			 */
 			$data = array_merge( $data, $_POST['data'] ); 
 		}
 
