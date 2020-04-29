@@ -62,13 +62,17 @@ class WPSE_85107 {
 	}
 
 	function save_post( $post_id, $post ) {
-		if ( $post->post_type == $this->FOR_POST_TYPE ) {
-			if ( isset( $_POST[$this->field_name] ) ) {
-				update_post_meta( $post_id, $this->meta_key, $_POST[$this->field_name] );
-			} else {
-				delete_post_meta( $post_id, $this->meta_key );
-			}
+		if ( $post->post_type != $this->FOR_POST_TYPE ) {
+			return;
 		}
+
+		if ( ! isset( $_POST[$this->field_name] ) ) {
+			delete_post_meta( $post_id, $this->meta_key );
+			return;
+		}
+
+		$sanitizedValues = array_filter( $_POST[$this->field_name], 'ctype_digit' );
+		update_post_meta( $post_id, $this->meta_key, $sanitizedValues );
 	}
 }
 
