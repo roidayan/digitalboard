@@ -1,81 +1,199 @@
 msgid ""
 msgstr ""
+"Project-Id-Version: digitalboard\n"
+"POT-Creation-Date: 2020-05-02 20:27+0300\n"
+"PO-Revision-Date: \n"
+"Last-Translator: \n"
+"Language-Team: \n"
+"Language: he\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Generator: POEditor.com\n"
-"Project-Id-Version: digitalboard\n"
-"Language: he\n"
+"X-Generator: Poedit 2.2.4\n"
+"X-Poedit-KeywordsList: __\n"
+"X-Poedit-Basepath: ..\n"
+"X-Poedit-SearchPath-0: .\n"
 
-#: 
+#: class.dboard.php:96 class.dboard.php:97
 msgid "Digital Board"
 msgstr "מסך דיגיטלי"
 
-#: 
+#: class.dboard.php:113
+#| msgid "Soul Settings"
+msgid "General Settings"
+msgstr ""
+
+#: class.dboard.php:117
 msgid "Soul Settings"
 msgstr "הגדרות לנשמות"
 
-#: 
-msgid "Screens"
-msgstr "מסכים"
+#: class.dboard.php:121
+msgid "Shortcode"
+msgstr ""
 
-#: 
-msgid "Messages"
-msgstr "הודעות"
+#: class.dboard.php:165
+msgid "OpenWeahterMap API key"
+msgstr ""
 
-#: 
-msgid "Souls"
-msgstr "נשמות"
+#: class.dboard.php:170
+msgid "OpenWeahterMap location"
+msgstr ""
 
-#: 
-msgid "Next Memorial Day"
-msgstr "יום זיכרון הבא"
+#: class.dboard.php:176
+msgid "OpenWeahterMap language"
+msgstr ""
 
-#: 
-msgid "Memorial Day"
-msgstr "יום זיכרון"
+#: class.dboard.php:181 class.dboard.php:191 class.dboard.php:206
+msgid "Status"
+msgstr ""
 
-#: 
-msgid "Use image provider"
-msgstr "להשתמש בספק תמונות"
+#: class.dboard.php:187
+msgid "Pixabay API key"
+msgstr ""
 
-#: 
-msgid "Select Messages"
-msgstr "בחר הודעות"
+#: class.dboard.php:197
+msgid "RSS feed label"
+msgstr ""
 
-#: 
-msgid "No Messages"
-msgstr "אין הודעות"
+#: class.dboard.php:202
+msgid "RSS feed"
+msgstr ""
 
-#: 
-msgid "New Screen"
-msgstr "מסך חדש"
-
-#: 
-msgid "New Message"
-msgstr "הודעה חדשה"
-
-#: 
-msgid "Invalid memorial day"
-msgstr "תאריך זיכרון לא חוקי"
-
-#: 
-msgid "New Soul"
-msgstr "נשמה חדשה"
-
-#: 
-msgid "Create holiday messages"
-msgstr "צור הודעות עבור החגים"
-
-#: 
-msgid "Cycle messages interval"
-msgstr "זמן מחזורי בין הודעות"
-
-#: 
+#: class.dboard.php:215
 msgid "Heartbeat interval"
 msgstr "זמן מחזורי לעדכון"
 
-#: 
+#: class.dboard.php:216 class.dboard.php:225
 msgid "In seconds"
 msgstr "בשניות"
 
+#: class.dboard.php:224
+msgid "Cycle messages interval"
+msgstr "זמן מחזורי בין הודעות"
+
+#: class.dboard.php:230
+msgid "Create holiday messages"
+msgstr "צור הודעות עבור החגים"
+
+#: class.dboard.php:238
+msgid "Featured Image"
+msgstr ""
+
+#: class.dboard.php:291
+#, fuzzy
+#| msgid "Create holiday messages"
+msgid "Added holiday msgs"
+msgstr "צור הודעות עבור החגים"
+
+#: class.dboard.php:397
+msgid "Name"
+msgstr ""
+
+#: class.dboard.php:398 mb-memorial-day.php:40
+msgid "Memorial Day"
+msgstr "יום זיכרון"
+
+#: class.dboard.php:399 mb-memorial-day.php:83
+msgid "Next Memorial Day"
+msgstr "יום זיכרון הבא"
+
+#: class.dboard.php:411 mb-memorial-day.php:86
+msgid "Invalid memorial day"
+msgstr "תאריך זיכרון לא חוקי"
+
+#: class.dboard.php:425
+msgid "Souls"
+msgstr "נשמות"
+
+#: class.dboard.php:426
+#, fuzzy
+#| msgid "Souls"
+msgid "Soul"
+msgstr "נשמות"
+
+#: class.dboard.php:427 class.dboard.php:428 class.dboard.php:429
+msgid "New Soul"
+msgstr "נשמה חדשה"
+
+#: class.dboard.php:443
+msgid "Messages"
+msgstr "הודעות"
+
+#: class.dboard.php:444
+#, fuzzy
+#| msgid "Messages"
+msgid "Message"
+msgstr "הודעות"
+
+#: class.dboard.php:445 class.dboard.php:446 class.dboard.php:447
+msgid "New Message"
+msgstr "הודעה חדשה"
+
+#: class.dboard.php:461
+msgid "Screens"
+msgstr "מסכים"
+
+#: class.dboard.php:462
+#, fuzzy
+#| msgid "Screens"
+msgid "Screen"
+msgstr "מסכים"
+
+#: class.dboard.php:463 class.dboard.php:464 class.dboard.php:465
+msgid "New Screen"
+msgstr "מסך חדש"
+
+#: class.settings.php:372
+msgid "Choose file"
+msgstr ""
+
+#: class.settings.php:393
+msgid "Choose Image"
+msgstr ""
+
+#: mb-memorial-day.php:69
+msgid "Date"
+msgstr ""
+
+#: mb-msgs.php:34
+msgid "Select Messages"
+msgstr "בחר הודעות"
+
+#: mb-msgs.php:35
+msgid "No Messages"
+msgstr "אין הודעות"
+
+#: shortcodes.php:121
+msgid "Sunrise time"
+msgstr "שעת זריחה"
+
+#: shortcodes.php:122
+msgid "Sunset time"
+msgstr "שעת שקיעה"
+
+#: shortcodes.php:123
+msgid "Hebrew day name"
+msgstr "יום עברי"
+
+#: shortcodes.php:124
+msgid "Hebrew date"
+msgstr "תאריך עברי"
+
+#: shortcodes.php:125
+msgid "Parashat hashavua"
+msgstr "פרשת השבוע"
+
+#: shortcodes.php:126
+msgid "Candle light time"
+msgstr "שעת הדלקת נרות"
+
+#: shortcodes.php:127
+msgid "Havdalah"
+msgstr "שעת הבדלה"
+
+#: shortcodes.php:129
+msgid "Available shortcodes:"
+msgstr "שורטקוד קיימים:"
+
+#~ msgid "Use image provider"
+#~ msgstr "להשתמש בספק תמונות"
