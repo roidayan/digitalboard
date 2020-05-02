@@ -368,11 +368,11 @@ class DigitalBoard {
 	static function enqueue_scripts() {
 		wp_enqueue_script( 'heartbeat2' );
 
-		wp_enqueue_script( 'news-ticker',
+		wp_register_script( 'news-ticker',
 			 plugins_url( 'news-ticker/breaking-news-ticker.min.js', __FILE__ ),
 			array( 'jquery' ), '1.0.0' );
 
-		wp_enqueue_style( 'news-ticker',
+		wp_register_style( 'news-ticker',
 			plugins_url( 'news-ticker/breaking-news-ticker.css', __FILE__ ),
 			array(), '1.0.0' );
 
@@ -592,6 +592,9 @@ class DigitalBoard {
 		if ( ! $news ) {
 			return;
 		}
+
+		wp_enqueue_script( 'news-ticker' );
+		wp_enqueue_style( 'news-ticker' );
 
 		$tmp = '';
 		foreach( $news as $item ) {
