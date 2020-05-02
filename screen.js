@@ -118,9 +118,13 @@ function dboard_update_time() {
 }
 
 function init_news_ticker() {
+	var ticker = jQuery('.breaking-news-ticker');
 	var dir = jQuery('html').attr('dir');
 
-	jQuery('.breaking-news-ticker').breakingNews({
+	if (ticker.length < 1)
+		return;
+
+	ticker.breakingNews({
 		effect: 'scroll',
 		direction: dir,
 		height: '50px',
