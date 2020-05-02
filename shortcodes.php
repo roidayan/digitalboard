@@ -114,3 +114,21 @@ add_shortcode( 'hebdate', array( 'HebcalShortcodes', 'hebdate' ) );
 add_shortcode( 'parashat', array( 'HebcalShortcodes', 'parashat' ) );
 add_shortcode( 'candles', array( 'HebcalShortcodes', 'candles' ) );
 add_shortcode( 'havdalah', array( 'HebcalShortcodes', 'havdalah' ) );
+
+
+function dboard_shortcodes_help() {
+	$a = array(
+		'[sunrise]'  => __('Sunrise time', DBOARD_TD),
+		'[sunset]'   => __('Sunset time', DBOARD_TD),
+		'[hebday]'   => __('Hebrew day name', DBOARD_TD),
+		'[hebdate]'  => __('Hebrew date', DBOARD_TD),
+		'[parashat]' => __('Parashat hashavua', DBOARD_TD),
+		'[candles]'  => __('Candle light time', DBOARD_TD),
+		'[havdalah]' => __('Havdalah', DBOARD_TD),
+	);
+	$help = "<h2>".__('Available shortcodes:', DBOARD_TD)."</h2><br>";
+	foreach($a as $k => $v) {
+		$help .= "$k - $v<br>";
+	}
+	return $help;
+}

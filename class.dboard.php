@@ -116,9 +116,18 @@ class DigitalBoard {
 				'id' => 'dboard_soul',
 				'title' => __( 'Soul Settings', DBOARD_TD ),
 			),
+			array(
+				'id' => 'dboard_shortcodes',
+				'title' => __( 'Shortcode' ),
+				'callback' => array( 'DigitalBoard', 'show_shortcodes_help' ),
+			),
 		);
 
 		return $sections;
+	}
+
+	static function show_shortcodes_help() {
+		print dboard_shortcodes_help();
 	}
 
 	static function callback_weather_demo() {
