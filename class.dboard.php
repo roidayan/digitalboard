@@ -376,6 +376,10 @@ class DigitalBoard {
 			plugins_url( 'news-ticker/breaking-news-ticker.css', __FILE__ ),
 			array(), '1.0.0' );
 
+		wp_register_style( 'animate',
+			plugins_url( 'templates/animate.min.css', __FILE__ ),
+			array(), '3.7.2' );
+
 		wp_enqueue_script( 'dboard-screen-script',
 			plugins_url( 'screen.js', __FILE__ ),
 			array( 'jquery' ), '1.0.0', true );

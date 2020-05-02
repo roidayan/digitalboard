@@ -7,9 +7,7 @@
  */
 
 function tpl_scripts() {
-	wp_enqueue_style( 'animate',
-		plugins_url( 'animate.min.css', __FILE__ ),
-		array(), '3.7.2' );
+	wp_enqueue_style( 'animate' );
 
 	wp_enqueue_style( 'dboard-page-style',
 		plugins_url( 'dboard-template-2.css', __FILE__ ),
@@ -23,7 +21,7 @@ function tpl_scripts() {
 }
 
 add_action( 'wp_enqueue_scripts', array( 'DigitalBoard', 'enqueue_scripts' ), 20 );
-add_action( 'wp_enqueue_scripts', 'tpl_scripts', 20 );
+add_action( 'wp_enqueue_scripts', 'tpl_scripts', 21 );
 
 function get_post_thumbnail($post_id) {
 	return wp_get_attachment_url( get_post_thumbnail_id( $post_id ), 'thumbnail' );
