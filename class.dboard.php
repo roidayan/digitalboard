@@ -554,7 +554,7 @@ class DigitalBoard {
 		return self::$settings->get_option( 'rss_feed_label', 'dboard_basic' );
 	}
 
-	static function fetch_feed( $url ) {
+	static function my_fetch_feed( $url ) {
 		add_filter( 'wp_feed_cache_transient_lifetime' , 'return_7200' );
 		$feed = fetch_feed( $url );
 		remove_filter( 'wp_feed_cache_transient_lifetime' , 'return_7200' );
@@ -563,7 +563,7 @@ class DigitalBoard {
 
 	static function get_rss_feed() {
 		$url = self::$settings->get_option( 'rss_feed', 'dboard_basic' );
-		$rss = self::fetch_feed( $url );
+		$rss = self::my_fetch_feed( $url );
 
 		if ( is_wp_error( $rss ) ) {
 			return false;
