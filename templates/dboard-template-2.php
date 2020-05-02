@@ -56,13 +56,21 @@ function show_holiday_page( $class ) {
 	echo "</div>";
 }
 
+function get_soul_bg_img() {
+	$img_id = DigitalBoard::get_setting('bg_img', 'dboard_soul');
+    $img = wp_get_attachment_image_src( $img_id, 'full' );
+	if ( ! $img )
+		return '';
+	return $img[0];
+}
+
 function show_soul_pages( $class ) {
 	$ilui_nishmat = 'לעילוי נשמת';
 	$tanzba = 'ת.נ.צ.ב.ה.';
 	$s = MB_SoulMemorialDay::get_instance();
 	$posts = $s->query_next_dates();
 	$meta_key = "soul_memorial_day";
-	$img = DigitalBoard::get_setting('bg_img', 'dboard_soul');
+	$img = get_soul_bg_img();
 	global $post;
 	foreach($posts as $post) {
 		setup_postdata( $post );

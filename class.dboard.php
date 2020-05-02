@@ -225,7 +225,7 @@ class DigitalBoard {
 			'dboard_soul' => array(
 				array(
 					'name' => 'bg_img',
-					'type' => 'file',
+					'type' => 'image',
 					'label' => __('Featured Image'),
 				),
 			),
