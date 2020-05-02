@@ -139,9 +139,9 @@ function cycle_single_msgs() {
 	if (dboard_settings.cycle_msgs_interval)
 		display_time = dboard_settings.cycle_msgs_interval * 1000;
 
-	container = jQuery(selector);
-	active = jQuery(".msg.active");
-	next = active.next();
+	var container = jQuery(selector);
+	var active = jQuery(".msg.active");
+	var next = active.next();
 
 	if (next.length == 0)
 		next = jQuery(".msg").first();
