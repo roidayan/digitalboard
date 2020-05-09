@@ -81,6 +81,22 @@ class PageTemplater {
 			'templates/dboard-template-2.php' => 'Digital Board Template 2',
 		);
 
+		add_action('add_meta_boxes', array( $this, 'set_default_template' ), 1);
+	}
+
+	/**
+	 * Set the first custom template as the default template for a new post.
+	 */
+	function set_default_template() {
+		global $post;
+		if ( DBOARD_SCREEN_POST_TYPE == $post->post_type
+			 && 0 != count( get_page_templates( $post ) )
+			 && get_option( 'page_for_posts' ) != $post->ID // Not the page for listing posts
+			 && '' == $post->page_template // Only when page_template is not set
+		   ) {
+			foreach($this->templates as $key=>$value) {break;}
+			$post->page_template = $key;
+		}
 	}
 
 	/**
