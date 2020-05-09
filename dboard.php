@@ -51,6 +51,7 @@ require_once( 'pagetemplater.php' );
 require_once( 'mb-msgs.php' );
 require_once( 'mb-memorial-day.php' );
 require_once( 'shortcodes.php' );
+require_once( 'rss-shortcode.php' );
 
 Heartbeat2::init();
 DigitalBoard::init();
