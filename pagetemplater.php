@@ -1,6 +1,9 @@
 <?php
 /**
  * @package DigitalBoard
+ *
+ * code is from here https://github.com/wpexplorer/page-templater
+ * modified for this project.
  */
 
 class PageTemplater {
