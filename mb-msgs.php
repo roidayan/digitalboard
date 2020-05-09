@@ -56,7 +56,7 @@ class WPSE_85107 {
 			'checked' => empty( $selected_post_id ) ? 0 : $selected_post_id,
 			'post_type' => $this->SELECT_POST_TYPE,
 			'show_option_none' => $this->field_label,
-			'sort_column' => 'post_date',
+			'sort_column' => 'post_title',
 		));
 		$wp_post_types[$this->SELECT_POST_TYPE]->hierarchical = $save_hierarchical;
 	}
