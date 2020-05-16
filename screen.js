@@ -7,12 +7,12 @@
 var dboard_page_version = 0;
 var dboard_last_rss_item = '';
 var dboard_refresh_at_midnight = false;
+var dboard_refresh_at_heartbeat = false;
 var dboard_settings = {};
 
 jQuery(document).ready(function( $ ) {
 	dboard_update_time();
 	setInterval(dboard_update_time, 1000);
-	dboard_set_next_midnight_event();
 	init_news_ticker();
 	window.heartbeat2.connectNow();
 
@@ -27,15 +27,14 @@ jQuery(document).ready(function( $ ) {
 	dboard_refresh_data( data );
 }).on( 'midnight', function() {
 	if (dboard_refresh_at_midnight) {
-		console.log('refresh at midnight')
-		location.reload();
-		return;
+		dboard_refresh_at_heartbeat = true;
 	}
-	window.heartbeat2.connectNow();
 });
 
 function refresh_at_midnight() {
+	console.log('refresh at midnight');
 	dboard_refresh_at_midnight = true;
+	dboard_set_next_midnight_event();
 }
 
 function dboard_refresh_data( data ) {
@@ -44,8 +43,14 @@ function dboard_refresh_data( data ) {
 		return;
 	}
 
+	if (dboard_refresh_at_heartbeat) {
+		console.log("force reload at heartbeat");
+		location.reload();
+		return;
+	}
+
 	if ( dboard_page_version && dboard_page_version != data.dboard.page_version ) {
-		console.log("force reload");
+		console.log("force reload page version");
 		location.reload();
 		return;
 	}
