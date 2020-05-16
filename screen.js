@@ -24,7 +24,10 @@ jQuery(document).ready(function( $ ) {
 	};
 
 }).on( 'heartbeat2-tick', function ( event, data ) {
+	jQuery('.hb-error-icon').hide();
 	dboard_refresh_data( data );
+}).on( 'heartbeat2-error', function() {
+	jQuery('.hb-error-icon').show();
 }).on( 'midnight', function() {
 	if (dboard_refresh_at_midnight) {
 		dboard_refresh_at_heartbeat = true;

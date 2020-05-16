@@ -60,6 +60,7 @@ $bg_img = DigitalBoard::get_background_image();
 ?>
   <div class="date"><?php echo DigitalBoard::get_current_date(); ?></div>
   <div class="clock" id="clock1"></div>
+  <div class="hb-error-icon" style="display: none; color: red;"><i class="fas fa-wifi"></i></div>
 </header>
 
 <div class="container" style="background-image: url('<?php echo $bg_img; ?>')">
