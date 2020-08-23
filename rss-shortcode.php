@@ -22,9 +22,9 @@ class RSS_SC {
 		}
 
 		$response['rss-sc'] = array();
-		foreach( $data['rss-sc'] as $a ) {
-			$a['items'] = self::get_rss_feed( $a['url'], $a['items'] );
-			$response['rss-sc'][] = $a;
+		foreach( $data['rss-sc'] as $attr ) {
+			$attr['items'] = self::get_rss_feed( $attr );
+			$response['rss-sc'][] = $attr;
 		}
 
 		return $response;
@@ -33,7 +33,8 @@ class RSS_SC {
 	static function shortcode( $atts ) {
 		extract(shortcode_atts( array(
 				'url' => '',
-				'items'	=> 10
+				'items'	=> 10,
+				'html_decode' => false,
 		), $atts ));
 
 		if ( empty( $url ) ) {
@@ -47,22 +48,30 @@ class RSS_SC {
 		/* uniqid() is only based micro seconds so to increase chance of uniq use str_shuffle() */
 		$id = 'rss'.str_shuffle(uniqid());
 
-		return '<div class="rss-news" data-id="'.$id.'" data-url="'.$url.'" data-items="'.$items.'"></div>';
+		return '<div class="rss-news" data-id="'.$id.'" data-url="'.$url.'" data-items="'.$items.'" data-html_decode="'.$html_decode.'"></div>';
 	}
 
-	static function get_rss_feed( $url, $items ) {
+	static function get_rss_feed( $attr ) {
+		$url = $attr['url'];
+		$items = $attr['items'];
 		$rss = DigitalBoard::my_fetch_feed( $url );
 
 		if ( is_wp_error( $rss ) ) {
 			return false;
 		}
 
+		$html_decode = isset( $attr['html_decode'] );
+
 		$maxitems = $rss->get_item_quantity( $items );
 		$rss_items = $rss->get_items( 0, $maxitems );
 		$out = array();
 
 		foreach ( $rss_items as $item ) {
-			$out[] = $item->get_title();
+			$tmp = $item->get_title();
+			if ( $html_decode ) {
+				$tmp = htmlspecialchars_decode( $tmp );
+			}
+			$out[] = esc_html( $tmp );
 		}
 
 		return $out;
