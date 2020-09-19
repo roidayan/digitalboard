@@ -50,6 +50,7 @@ require_once( 'checklist-pages.php' );
 require_once( 'pagetemplater.php' );
 require_once( 'mb-msgs.php' );
 require_once( 'mb-memorial-day.php' );
+require_once( 'mb-screen-audio.php' );
 require_once( 'shortcodes.php' );
 require_once( 'rss-shortcode.php' );
 

@@ -629,4 +629,8 @@ class DigitalBoard {
 		$label = '<div class="bn-label">'.DigitalBoard::get_rss_feed_label().'</div>';
 		return '<div class="breaking-news-ticker">'.$label.$tmp.'</div>';
 	}
+
+	static function get_post_audio() {
+		return get_post_meta( get_the_ID(), 'post_audio', true );
+	}
 }
