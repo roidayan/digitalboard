@@ -53,6 +53,24 @@ class DigitalBoard {
 		add_action( 'admin_menu', array( 'DigitalBoard', 'admin_menu' ) );
 		add_filter( 'admin_post_thumbnail_html', array( 'DigitalBoard', 'add_featured_image_display_settings' ), 10, 2 );
 		add_action( 'save_post', array( 'DigitalBoard', 'save_post' ), 10, 2 );
+		add_filter( 'get_pages', array( 'DigitalBoard', 'add_pages_to_front_page_dropdown' ), 10, 2 );
+	}
+
+	static function add_pages_to_front_page_dropdown( $pages, $r ) {
+		if ( ! isset( $r[ 'name' ] ) )
+			return $pages;
+
+		if ( 'page_on_front' != $r[ 'name' ] )
+			return $pages;
+
+		$args = array(
+			'post_type' => DBOARD_SCREEN_POST_TYPE
+		);
+
+		$extra = get_posts( $args );
+		$pages = array_merge( $pages, $extra );
+
+		return $pages;
 	}
 
 	static function save_post( $post_id, $post ) {
