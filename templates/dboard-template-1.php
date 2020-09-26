@@ -7,6 +7,10 @@
  */
 
 function tpl_scripts() {
+	wp_enqueue_script( 'dboard-tpl-script',
+		plugins_url( 'dboard-template-1.js', __FILE__ ),
+		array( 'dboard-screen-script' ), '1.0.0', true );
+
 	wp_enqueue_style( 'dboard-page-style',
 		plugins_url( 'dboard-template-1.css', __FILE__ ),
 		array(), '1.0.0' );
@@ -19,7 +23,7 @@ function tpl_scripts() {
 }
 
 add_action( 'wp_enqueue_scripts', array( 'DigitalBoard', 'enqueue_scripts' ), 20 );
-add_action( 'wp_enqueue_scripts', 'tpl_scripts', 20 );
+add_action( 'wp_enqueue_scripts', 'tpl_scripts', 21 );
 
 nocache_headers();
 ?><!DOCTYPE html>
@@ -46,10 +50,6 @@ $bg_img = DigitalBoard::get_background_image();
 
 <script>
 	var pagenow = <?php the_ID(); ?>;
-	jQuery(document).ready(function( $ ) {
-		set_first_msg_image_background();
-		refresh_at_midnight();
-	});
 </script>
 </head>
 <body <?php body_class(); ?>>

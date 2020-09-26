@@ -7,6 +7,10 @@
  */
 
 function tpl_scripts() {
+	wp_enqueue_script( 'dboard-tpl-script',
+		plugins_url( 'dboard-template-2.js', __FILE__ ),
+		array( 'dboard-screen-script' ), '1.0.0', true );
+
 	wp_enqueue_style( 'animate' );
 
 	wp_enqueue_style( 'dboard-page-style',
@@ -108,10 +112,6 @@ $bg_img = DigitalBoard::get_background_image();
 
 <script>
 	var pagenow = <?php the_ID(); ?>;
-	jQuery(document).ready(function( $ ) {
-		cycle_single_msgs();
-		refresh_at_midnight();
-	});
 </script>
 </head>
 <body <?php body_class(); ?>>
