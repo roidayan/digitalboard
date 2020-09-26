@@ -16,7 +16,7 @@ function tpl_scripts() {
 	if ( is_rtl() ) {
 		wp_enqueue_style( 'dboard-page-style-rtl',
 			plugins_url('dboard-template-1-rtl.css', __FILE__),
-			array(), '1.0.0' );
+			array('dboard-page-style'), '1.0.0' );
 	}
 }
 
