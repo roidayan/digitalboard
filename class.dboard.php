@@ -400,7 +400,7 @@ class DigitalBoard {
 
 		wp_enqueue_script( 'dboard-screen-script',
 			plugins_url( 'screen.js', __FILE__ ),
-			array( 'jquery' ), '1.0.0', true );
+			array( 'jquery', 'heartbeat2' ), '1.0.0', true );
 
 		wp_enqueue_style( 'font-awesome', 'https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.13.0/css/fontawesome.min.css' );
 		wp_enqueue_style( 'font-awesome-solid', 'https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.13.0/css/solid.min.css' );
