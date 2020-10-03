@@ -2,9 +2,9 @@
 
 class Hebcal {
 	static $instance = null;
-	var $hebcal_remote_url = 'http://www.hebcal.com/hebcal/';
-	var $shabbat_remote_url = 'http://www.hebcal.com/shabbat/';
-	var $date_converter_remote_url = 'http://www.hebcal.com/converter/';
+	var $hebcal_remote_url = 'https://www.hebcal.com/hebcal/';
+	var $shabbat_remote_url = 'https://www.hebcal.com/shabbat/';
+	var $date_converter_remote_url = 'https://www.hebcal.com/converter/';
 	var $lg = '';
 	var $geonameid = '293397'; // Tel Aviv, Israel
 
