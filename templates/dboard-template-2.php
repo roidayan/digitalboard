@@ -39,7 +39,7 @@ function show_holiday_page( $class ) {
 
 	$item = $items[0];
 	$title = $item['title'];
-	$slug = basename($item['link']);
+	$slug = $item['tag'];
 	global $post;
 	$post = DigitalBoard::get_post_by_slug($slug);
 	if ($post) {
@@ -52,7 +52,7 @@ function show_holiday_page( $class ) {
 		$img = "";
 		$content = "";
 	}
-	echo "<div class=\"$class $slug\" data-img=\"$img\">";
+	echo "<div class=\"$class holiday $slug\" data-img=\"$img\">";
 	echo "<h3>$title</h3>";
 	echo $content;
 	echo "</div>";

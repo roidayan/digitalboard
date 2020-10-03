@@ -99,9 +99,14 @@ class Hebcal {
 			return false;
 		$items = array();
 		foreach( $allitems as $item ) {
-			$slug = basename($item['link']);
-			if (in_array($slug, $tags))
-				$items[] = $item;
+			$link = $item['link'];
+			foreach( $tags as $tag ) {
+				if (strpos($link, $tag) !== false) {
+					$item['tag'] = $tag;
+					$items[] = $item;
+					break;
+				}
+			}
 		}
 		return $items;
 	}
