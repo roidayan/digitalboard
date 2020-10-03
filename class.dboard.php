@@ -554,12 +554,16 @@ class DigitalBoard {
 		return esc_attr( get_post_meta( get_the_ID(), $field_id, true ) );
 	}
 
+	static function get_image( $key ) {
+		return self::$image_provider->get_image( $key );
+	}
+
 	static function get_background_image() {
 		$img = '';
 
 		if ( self::use_image_provider() ) {
 			$weather = self::$weather_provider;
-			$img = self::$image_provider->get_image( $weather->get_weather_name() );
+			$img = self::get_image( $weather->get_weather_name() );
 		}
 
 		if ( empty( $img ) ) {
