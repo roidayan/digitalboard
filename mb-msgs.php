@@ -31,8 +31,8 @@ class WPSE_85107 {
 		$this->box_id       = "select-{$this->SELECT_POST_TYPE}-metabox";
 		$this->field_id     = "selected-{$this->SELECT_POST_TYPE}";
 		$this->field_name   = "selected_{$this->SELECT_POST_TYPE}";
-		$this->box_label    = __( "Select Messages" );
-		$this->field_label  = __( "No Messages" );
+		$this->box_label    = __( "Messages", DBOARD_TD );
+		$this->field_label  = __( "No Messages", DBOARD_TD );
 	}
 
 	function add_meta_boxes() {

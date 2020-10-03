@@ -23,7 +23,7 @@ class MB_ScreenAudio {
 		add_action( 'save_post', array( $this, 'save_post' ), 10, 2 );
 		$this->meta_key     = "_selected_{$this->FOR_POST_TYPE}_audio";
 		$this->box_id       = "select-{$this->FOR_POST_TYPE}-metabox";
-		$this->box_label    = __( "Select Audio" );
+		$this->box_label    = __( "Audio" );
 	}
 
 	function add_meta_boxes() {
@@ -39,7 +39,7 @@ class MB_ScreenAudio {
 	function render_meta_box( $post ) {
 		$post_audio = get_post_meta( $post->ID, 'post_audio', true );
 		?>
-		<label id="post-label-audio" for="post_audio">Audio</label>
+		<label id="post-label-audio" for="post_audio"><?= __("Audio") ?></label>
 		<input type="text" name="post_audio" id="post_audio" value="<?=$post_audio; ?>" autocomplete="off">
 		<?php
 	}
