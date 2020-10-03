@@ -71,12 +71,17 @@ class HebcalShortcodes {
 		return g2h_today();
 	}
 
-	static function get_item_by_category($items, $category) {
-		if ($items) {
-			foreach( $items as $item ) {
-				if ($item['category'] == $category) {
+	static function get_item_by_category($items, $category, $today=false) {
+		if (!$items)
+			return false;
+
+		if ($today)
+			$today1 = date( 'Y-m-d', current_time('timestamp') );
+
+		foreach( $items as $item ) {
+			if ($item['category'] == $category) {
+				if (!$today || $today1 == $item['date'])
 					return $item;
-				}
 			}
 		}
 		return false;
@@ -86,6 +91,8 @@ class HebcalShortcodes {
 		$h = get_hebcal();
 		$data = $h->shabbat();
 		$item = self::get_item_by_category($data['items'], 'parashat');
+		if ( empty( $item ) )
+			$item = self::get_item_by_category($data['items'], 'holiday', true);
 		return $item['title'];
 	}
 
