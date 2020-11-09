@@ -76,7 +76,9 @@ class OpenWeatherMap {
 			return;
 
 		$d = $w['weather'][0]['icon'];
-		return 'http://openweathermap.org/img/w/'.$d.'.png';
+		if ($d)
+			$d = 'http://openweathermap.org/img/w/'.$d.'.png';
+		return $d;
 	}
 
 	function get_weather_temp() {
