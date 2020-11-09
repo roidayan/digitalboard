@@ -12,7 +12,7 @@ class OpenWeatherMap {
 	var $data = 0;
 	var $transient_key = 'openweathermap';
 	var $cache = false;
-	var $expire = 600;
+	var $expire = 1800;
 
 	static function get_instance( $key='', $loc='', $lang='' ) {
 		if ( ! self::$instance ) {
