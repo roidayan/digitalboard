@@ -89,13 +89,6 @@ $bg_img = DigitalBoard::get_background_image();
 		echo "<footer>$news</footer>";
 	}
 ?>
-
-<?php
-	$post_audio = DigitalBoard::get_post_audio();
-	if ( $post_audio ) {
-		echo '<audio src="' . $post_audio . '" autoplay loop />';
-	}
-?>
 </body>
 <?php wp_footer(); ?>
 </html>

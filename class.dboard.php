@@ -356,6 +356,7 @@ class DigitalBoard {
 		$weather = self::$weather_provider;
 		$page_version = self::get_page_version();
 		$news_ticker = self::get_news_ticker();
+		$audio = self::get_post_audio();
 
 		$interval = self::$settings->get_option( 'cycle_msgs_interval', 'dboard_basic' );
 		if ( empty( $interval ) || $interval < 1 || $interval >  1000 ) {
@@ -374,6 +375,7 @@ class DigitalBoard {
 			'news_ticker' => $news_ticker,
 			'last_rss_item' => self::$last_rss_item,
 			'cycle_msgs_interval' => $interval,
+			'audio' => $audio,
 		);
 
 		wp_reset_postdata();

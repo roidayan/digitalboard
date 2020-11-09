@@ -9,6 +9,7 @@ var dboard_last_rss_item = '';
 var dboard_refresh_at_midnight = false;
 var dboard_refresh_at_heartbeat = false;
 var dboard_settings = {};
+var dboard_audio = '';
 
 jQuery(document).ready(function( $ ) {
 	dboard_update_time();
@@ -77,6 +78,28 @@ function dboard_refresh_data( data ) {
 		jQuery('.breaking-news-ticker').replaceWith( data.dboard.news_ticker );
 		init_news_ticker();
 	}
+
+	dboard_set_audio();
+}
+
+function dboard_set_audio() {
+	if (dboard_audio)
+		return;
+
+	if (!dboard_settings.audio)
+		return;
+
+	var a = document.createElement('audio');
+	a.src = dboard_settings.audio;
+	a.currentTime = 0;
+	a.loop = true;
+	a.addEventListener('ended', function() {
+		this.currentTime = 0;
+		this.play();
+	}, false);
+	a.play();
+
+	dboard_audio = a;
 }
 
 function dboard_set_background_image( selector, img, credit ) {
