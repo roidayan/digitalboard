@@ -22,6 +22,9 @@ jQuery(document).ready(function( $ ) {
 		"hello": 1,
 		"screen_id": pagenow,
 		"last_rss_item": dboard_last_rss_item,
+		"debug": {
+			"audio": get_audio_attributes(),
+		},
 	};
 
 }).on( 'heartbeat2-tick', function ( event, data ) {
@@ -34,6 +37,19 @@ jQuery(document).ready(function( $ ) {
 		dboard_refresh_at_heartbeat = true;
 	}
 });
+
+function get_audio_attributes() {
+	if (!dboard_audio)
+		return {};
+
+	var items = ['networkState', 'readyState', 'currentSrc', 'currentTime', 'muted', 'paused', 'ended', 'error'];
+	var a = {};
+	items.forEach(function(i){
+		a[i] = dboard_audio[i];
+	});
+
+	return a;
+}
 
 function refresh_at_midnight() {
 	console.log('refresh at midnight');

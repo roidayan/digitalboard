@@ -14,6 +14,7 @@ class DigitalBoard {
 	private static $image_provider;
 	private static $last_rss_item;
 	private static $meta_key_use_image_provider = '_dboard_use_image_provider';
+	private static $transient_debug_key = 'dboard_debug';
 
 
 	public static function load_text_domain() {
@@ -139,9 +140,21 @@ class DigitalBoard {
 				'title' => __( 'Shortcode' ),
 				'callback' => array( 'DigitalBoard', 'show_shortcodes_help' ),
 			),
+			array(
+				'id' => 'dboard_debug',
+				'title' => __( 'Debug' ),
+				'callback' => array( 'DigitalBoard', 'show_debug' ),
+			),
 		);
 
 		return $sections;
+	}
+
+	static function show_debug() {
+		$debug = get_transient( self::$transient_debug_key );
+		print '<pre style="direction: ltr;">';
+		print_r($debug);
+		print '</pre>';
 	}
 
 	static function show_shortcodes_help() {
@@ -344,6 +357,18 @@ class DigitalBoard {
 		if ( empty( $data['dboard'] ) || empty( $data['dboard']['screen_id'] ) ) {
 			return $response;
 		}
+
+		$ip = $_SERVER['REMOTE_ADDR'];
+		$debug = get_transient( self::$transient_debug_key );
+		if ( !is_array( $debug )) {
+			$debug = array();
+		}
+
+		$debug[$ip] = array(
+			'time' => date( 'Y-m-d H:i:s', current_time('timestamp')),
+			'data' => empty( $data['dboard']['debug'] ) ? '' : $data['dboard']['debug'],
+		);
+		set_transient( self::$transient_debug_key, $debug, 3600 );
 
 		global $post;
 		$post = get_post( $data['dboard']['screen_id'] );
