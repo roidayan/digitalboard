@@ -89,6 +89,8 @@ function dboard_set_audio() {
 	if (!dboard_settings.audio)
 		return;
 
+	console.log("restart audio");
+
 	var a = document.createElement('audio');
 	a.src = dboard_settings.audio;
 	a.currentTime = 0;
