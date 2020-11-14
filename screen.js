@@ -111,10 +111,6 @@ function dboard_set_audio() {
 	a.src = dboard_settings.audio;
 	a.currentTime = 0;
 	a.loop = true;
-	a.addEventListener('ended', function() {
-		this.currentTime = 0;
-		this.play();
-	}, false);
 	a.play();
 
 	dboard_audio = a;
