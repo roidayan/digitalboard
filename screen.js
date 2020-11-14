@@ -42,7 +42,7 @@ function get_audio_attributes() {
 	if (!dboard_audio)
 		return {};
 
-	var items = ['networkState', 'readyState', 'currentSrc', 'currentTime', 'muted', 'paused', 'ended', 'error'];
+	var items = ['networkState', 'readyState', 'currentSrc', 'currentTime', 'duration', 'loop', 'muted', 'paused', 'ended', 'error'];
 	var a = {};
 	items.forEach(function(i){
 		a[i] = dboard_audio[i];
