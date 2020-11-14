@@ -134,8 +134,10 @@ function dboard_shortcodes_help() {
 		'[havdalah]' => __('Havdalah', DBOARD_TD),
 	);
 	$help = "<h2>".__('Available shortcodes:', DBOARD_TD)."</h2><br>";
+	$help .= "<table>";
 	foreach($a as $k => $v) {
-		$help .= "$k - $v<br>";
+		$help .= "<tr><td>$k</td><td>$v</td></tr>";
 	}
+	$help .= "</table>";
 	return $help;
 }
