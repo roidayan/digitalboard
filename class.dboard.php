@@ -366,6 +366,7 @@ class DigitalBoard {
 
 		$debug[$ip] = array(
 			'time' => date( 'Y-m-d H:i:s', current_time('timestamp')),
+			'user-agent' => $_SERVER['HTTP_USER_AGENT'],
 			'data' => empty( $data['dboard']['debug'] ) ? '' : $data['dboard']['debug'],
 		);
 		set_transient( self::$transient_debug_key, $debug, 3600 );
