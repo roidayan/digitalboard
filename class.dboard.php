@@ -266,7 +266,7 @@ class DigitalBoard {
 				array(
 					'name' => 'bg_img',
 					'type' => 'image',
-					'label' => __('Featured Image'),
+					'label' => _x('Featured image', 'page'),
 				),
 			),
 		);
